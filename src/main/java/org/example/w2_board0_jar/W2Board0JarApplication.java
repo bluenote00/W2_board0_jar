@@ -10,4 +10,5 @@ public class W2Board0JarApplication {
         SpringApplication.run(W2Board0JarApplication.class, args);
     }
 
+
 }
