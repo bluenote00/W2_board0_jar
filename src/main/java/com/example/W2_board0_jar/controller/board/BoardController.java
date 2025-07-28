@@ -33,16 +33,17 @@ public class BoardController {
     /**
      * 게시판 전체 리스트 조회
      */
-    @RequestMapping("/boardList")
+    @RequestMapping("/")
     public String SelectBoardList(Model model, @RequestParam Map<String, Object> paramMap, HttpSession session) throws Exception {
 
         logger.info("+ Start " + className + ".boardList");
-        logger.info("   - paramMap : " + paramMap);
 
         List<BoardDto> boardList = boardService.SelectBoardList(paramMap);
 
         model.addAttribute("boardList", boardList);
         model.addAttribute("userId", session.getAttribute("userId"));
+
+        logger.info("   - paramMap : " + boardList);
 
         return "list";
     }

@@ -6,11 +6,12 @@
     <!-- 게시글 조회-->
     <select id="SelectBoardList" parameterType="java.util.Map" resultType ="com.example.W2_board0_jar.dto.board.BoardDto">
         /* com.example.W2_board0_jar.dao.board.BoardDao */
-        SELECT 		BOARD_TYPE
-             ,		BOARD_NUM
-             ,		BOARD_TITLE
+        SELECT 		BOARD_TYPE      AS  boardType
+             ,		BOARD_NUM       AS  boardNum
+             ,		BOARD_TITLE     AS  boardTitle
+             ,    	BOARD_COMMENT   AS  boardComment
         FROM 		BOARD
-        ORDER BY 	BOARD_NUM DESC
+        ORDER BY 	BOARD_NUM       DESC
     </select>
 
 </mapper>

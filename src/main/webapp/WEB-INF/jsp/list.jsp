@@ -41,7 +41,7 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach var="board" items="${boardList.content}">
+        <c:forEach var="board" items="${boardList}">
             <tr>
                 <td><c:out value="${board.boardType}"/></td>
                 <td><c:out value="${board.boardNum}"/></td>

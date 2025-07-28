@@ -29,17 +29,7 @@ public class BoardDto {
     // 파일경로
     private String fileRoot;
 
-    public BoardDto(String boardType, int boardNum, String boardTitle, String boardComment, String creater, String createTime, String modifier, String modifiedTime, String fileRoot) {
-        this.boardType = boardType;
-        this.boardNum = boardNum;
-        this.boardTitle = boardTitle;
-        this.boardComment = boardComment;
-        this.creater = creater;
-        this.createTime = createTime;
-        this.modifier = modifier;
-        this.modifiedTime = modifiedTime;
-        this.fileRoot = fileRoot;
-    }
+    public BoardDto() {}
 
     public String getBoardType() {
         return boardType;
