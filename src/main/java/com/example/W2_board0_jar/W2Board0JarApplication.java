@@ -7,6 +7,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication
+@MapperScan("com.example.W2_board0_jar.dao")
 public class W2Board0JarApplication extends SpringBootServletInitializer {
 
     @Override

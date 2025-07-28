@@ -46,31 +46,4 @@ public class BoardController {
 
         return "list";
     }
-
-    /**
-     * 게시글 한 건 상세 조회
-     */
-    @RequestMapping("/listdetail")
-    public String SelectBoardDetail() {
-        return "1";
-    }
-
-    /**
-     * 게시글 작성
-     */
-    
-    @GetMapping("/boardcount")
-    public String SelectBoardCount() {
-        return "1";
-    }
-
-    @GetMapping("/commoncode")
-    public String SelectCommonCode() {
-        return "1";
-    }
-
-    @GetMapping("/paging")
-    public String Paging() {
-        return "1";
-    }
 }

@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.W2_board0_jar.dao.board.BoardDao">
-    <select id="boardCnt" parameterType="map" resultType="int">
-        SELECT 	COUNT(*)
-        FROM 	tb_board
-    </select>
-
-    <!-- 게시글 조회 -->
-    <select id = "SelectBoardList" parameterType="java.util.Map" resultType ="com.example.W2_board0_jar.dto.board.BoardDto">
+    <!-- 게시글 조회-->
+    <select id="SelectBoardList" parameterType="java.util.Map" resultType ="com.example.W2_board0_jar.dto.board.BoardDto">
         /* com.example.W2_board0_jar.dao.board.BoardDao */
         SELECT 		BOARD_TYPE
              ,		BOARD_NUM
@@ -17,47 +13,4 @@
         ORDER BY 	BOARD_NUM DESC
     </select>
 
-    <!-- 게시글 등록 -->
-    <insert id="insertBoard" parameterType="map">
-        <selectKey keyProperty="boardNum" resultType="int" order="BEFORE">
-            SELECT IFNULL(MAX(boardNum), 0) + 1 FROM BOARD
-        </selectKey>
-        INSERT INTO 	BOARD
-        (
-                BOARD_NUM
-        ,       BOARD_TYPE
-        ,		BOARD_TITLE
-        ,		BOARD_COMMENT
-        ,		CREATOR
-        ,		CREATE_TIME
-        ) VALUES (
-                #{boardNum}
-        ,       #{boardType}
-        ,		#{boardTitle}
-        ,		#{boardComment}
-        ,		#{creater}
-        ,		NOW()
-        )
-    </insert>
-
-    <!-- 수정 -->
-    <update id="updateBoard" parameterType="com.example.W2_board0_jar.dto.board.BoardDto">
-        UPDATE 		tb_board
-        SET 		board_name	    = 	#{board_name}
-          ,	        board_content 	= 	#{board_content}
-          ,	        user_name 		= 	#{user_name}
-          ,  	    board_date 	    =   NOW()
-        WHERE 		board_no        =   #{board_no}
-    </update>
-
-    <!-- 삭제 -->
-    <delete id="deleteBoard"  parameterType="java.util.List">
-        DELETE
-        FROM 	tb_board
-        WHERE 	board_no
-        IN
-        <foreach item="no" collection="boardNos" open="(" separator="," close=")">
-            #{no}
-        </foreach>
-    </delete>
 </mapper>

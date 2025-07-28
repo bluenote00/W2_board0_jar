@@ -21,12 +21,12 @@ public class BoardService {
     private final String className = this.getClass().toString();
 
     @Autowired
-    BoardDao boardDao;
+    BoardDao dao;
 
     /**
      * 게시판 전체 리스트 조회
      */
     public List<BoardDto> SelectBoardList(Map<String, Object> paramMap) throws Exception {
-        return boardDao.SelectBoardList(paramMap);
+        return dao.SelectBoardList(paramMap);
     }
 }
