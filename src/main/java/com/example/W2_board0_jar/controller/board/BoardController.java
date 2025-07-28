@@ -50,4 +50,56 @@ public class BoardController {
         return "list";
     }
 
+    /**
+     * 게시글 상세보기
+     */
+    @RequestMapping("/board/read")
+    public String SelectBoardDetail(Model model, @RequestParam Map<String, Object> paramMap, HttpSession session) throws Exception {
+
+        logger.info("+ Start " + className + ".boardDetail");
+
+        paramMap.put("boardType", paramMap.get("boardType"));
+        paramMap.put("boardNum", paramMap.get("boardNum"));
+
+        List<BoardDto> boardDetail = boardService.SelectBoardDetail(paramMap);
+
+        model.addAttribute("boardDetail", boardDetail);
+        model.addAttribute("userId", session.getAttribute("userId"));
+
+        logger.info("   - paramMap : " + boardDetail);
+
+        return "read";
+    }
+
+    /**
+     * 게시글 작성 페이지
+     */
+
+    @GetMapping("/board/register")
+    public String Resister(Model model, HttpSession session) throws Exception {
+        model.addAttribute("userId", session.getAttribute("userId"));
+        return "register";
+    }
+
+    /**
+     * 게시글 작성
+     */
+    @RequestMapping("/board/boardWrite")
+    public String BoardWrite(Model model, @RequestParam Map<String, Object> paramMap, HttpSession session) throws Exception {
+
+        logger.info("+ Start " + className + ".boardWrite");
+
+//        paramMap.put("boardType", paramMap.get("boardType"));
+//        paramMap.put("boardNum", paramMap.get("boardNum"));
+
+        List<BoardDto> boardWrite = boardService.BoardWrite(paramMap);
+
+        model.addAttribute("boardWrite", boardWrite);
+        model.addAttribute("userId", session.getAttribute("userId"));
+
+        logger.info("   - paramMap : " + boardWrite);
+
+        return "register";
+    }
+
 }

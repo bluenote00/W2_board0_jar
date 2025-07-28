@@ -36,4 +36,18 @@ public class BoardService {
     public int SelectBoardCount(Map<String, Object> paramMap) throws Exception {
         return dao.SelectBoardCount(paramMap);
     }
+
+    /**
+     * 게시글 상세보기
+     */
+    public List<BoardDto> SelectBoardDetail(Map<String, Object> paramMap) throws Exception {
+        return dao.SelectBoardDetail(paramMap);
+    }
+
+    /**
+     * 게시글 작성
+     */
+    public List<BoardDto> BoardWrite(Map<String, Object> paramMap) throws Exception {
+        return dao.BoardWrite(paramMap);
+    }
 }

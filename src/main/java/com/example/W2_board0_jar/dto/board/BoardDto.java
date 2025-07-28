@@ -15,7 +15,7 @@ public class BoardDto {
     private String boardComment;
 
     // 작성자
-    private String creater;
+    private String creator;
 
     // 작성시간
     private String createTime;
@@ -63,12 +63,12 @@ public class BoardDto {
         this.boardComment = boardComment;
     }
 
-    public String getCreater() {
-        return creater;
+    public String getCreator() {
+        return creator;
     }
 
-    public void setCreater(String creater) {
-        this.creater = creater;
+    public void setCreator(String creator) {
+        this.creator = creator;
     }
 
     public String getCreateTime() {

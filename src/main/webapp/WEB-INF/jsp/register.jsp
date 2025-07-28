@@ -14,11 +14,11 @@
         <label for="Type">게시글 타입</label>
         <select id="Type" name="boardType" required>
             <option value="" disabled selected>게시글 타입 선택</option>
-            <c:forEach var="menu" items="${comCodes}">
-                <option value="${menu.codeName}" <c:if test="${menu.codeName == boardDTO.boardType}">selected</c:if>>
-                    ${menu.codeName}
-                </option>
-            </c:forEach>
+<%--            <c:forEach var="menu" items="${comCodes}">--%>
+<%--                <option value="${menu.codeName}" <c:if test="${menu.codeName == boardDTO.boardType}">selected</c:if>>--%>
+<%--                    ${menu.codeName}--%>
+<%--                </option>--%>
+<%--            </c:forEach>--%>
         </select>
 
         <div class="form-group">
@@ -28,7 +28,7 @@
 
         <div class="form-group">
             <label>Comment</label>
-            <textarea name="boardComment">${boardDTO.boardComment}</textarea>
+            <textarea name="boardComment" value="${boardDTO.boardComment}"></textarea>
         </div>
 
         <div class="form-group">
@@ -38,7 +38,7 @@
 
         <div class="btn-group">
             <button type="submit">작성</button>
-            <a style="float: right;" href="${pageContext.request.contextPath}/board/list" class="btn">List</a>
+            <a style="float: right;" href="${pageContext.request.contextPath}/" class="btn">List</a>
         </div>
     </form>
 </div>
