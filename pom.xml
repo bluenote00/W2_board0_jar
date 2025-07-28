@@ -72,6 +72,13 @@
             <version>1.2.17</version>
         </dependency>
 
+        <!--   mybatis   -->
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>2.3.1</version> <!-- 최신 버전 확인 가능 -->
+        </dependency>
+
         <!-- log4jdbc -->
         <dependency>
             <groupId>org.bgee.log4jdbc-log4j2</groupId>
@@ -116,5 +123,7 @@
             </plugin>
         </plugins>
     </build>
+
+    <packaging>war</packaging>
 
 </project>
