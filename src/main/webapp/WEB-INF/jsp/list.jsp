@@ -22,16 +22,16 @@
 </head>
 <body>
 <div class="container">
-    <div class="header">
-        <c:if test="${empty sessionScope.user}">
-            <a href="${pageContext.request.contextPath}/member/login">Login</a>
-            <a href="${pageContext.request.contextPath}/member/join">Join</a>
-        </c:if>
-        <c:if test="${not empty sessionScope.user}">
-            <a href="${pageContext.request.contextPath}/member/logout">Logout</a>
-        </c:if>
-    </div>
-    <span style="float: right;">total: ${boardList.totalElements}</span>
+<%--    <div class="header">--%>
+<%--        <c:if test="${empty sessionScope.user}">--%>
+<%--            <a href="${pageContext.request.contextPath}/member/login">Login</a>--%>
+<%--            <a href="${pageContext.request.contextPath}/member/join">Join</a>--%>
+<%--        </c:if>--%>
+<%--        <c:if test="${not empty sessionScope.user}">--%>
+<%--            <a href="${pageContext.request.contextPath}/member/logout">Logout</a>--%>
+<%--        </c:if>--%>
+<%--    </div>--%>
+<%--    <span style="float: right;">total: ${boardList.totalElements}</span>--%>
     <table>
         <thead>
         <tr>
@@ -55,46 +55,46 @@
         </tbody>
     </table>
 
-    <form action="${pageContext.request.contextPath}/board/list" method="get">
-        <div class="board-type">
-            <c:forEach var="menu" items="${menuCode}">
-                <input type="radio" name="type" value="${menu.codeId}"
-                       id="type-${menu.codeId}" <c:if test="${selectedType == menu.codeId}">checked</c:if>>
-                <label for="type-${menu.codeId}">${menu.codeName}</label>
-            </c:forEach>
-        </div>
-        <input type="hidden" name="page" value="${boardList.number}">
-        <input type="hidden" name="size" value="${boardList.size}">
-        <button type="submit">조회</button>
-    </form>
+<%--    <form action="${pageContext.request.contextPath}/board/list" method="get">--%>
+<%--        <div class="board-type">--%>
+<%--            <c:forEach var="menu" items="${menuCode}">--%>
+<%--                <input type="radio" name="type" value="${menu.codeId}"--%>
+<%--                       id="type-${menu.codeId}" <c:if test="${selectedType == menu.codeId}">checked</c:if>>--%>
+<%--                <label for="type-${menu.codeId}">${menu.codeName}</label>--%>
+<%--            </c:forEach>--%>
+<%--        </div>--%>
+<%--        <input type="hidden" name="page" value="${boardList.number}">--%>
+<%--        <input type="hidden" name="size" value="${boardList.size}">--%>
+<%--        <button type="submit">조회</button>--%>
+<%--    </form>--%>
 
-    <div class="pagination">
-        <ul>
-            <li class="${boardList.first ? 'disabled' : ''}">
-                <c:if test="${!boardList.first}">
-                    <a href="${pageContext.request.contextPath}/board/list?page=${boardList.number -1}&size=${boardList.size}&type=${param.type}">이전</a>
-                </c:if>
-            </li>
+<%--    <div class="pagination">--%>
+<%--        <ul>--%>
+<%--            <li class="${boardList.first ? 'disabled' : ''}">--%>
+<%--                <c:if test="${!boardList.first}">--%>
+<%--                    <a href="${pageContext.request.contextPath}/board/list?page=${boardList.number -1}&size=${boardList.size}&type=${param.type}">이전</a>--%>
+<%--                </c:if>--%>
+<%--            </li>--%>
 
-            <c:forEach var="pageNum" begin="0" end="${boardList.totalPages - 1}">
-                <li class="${pageNum == boardList.number ? 'active' : ''}">
-                    <a href="${pageContext.request.contextPath}/board/list?page=${pageNum}&size=${boardList.size}&type=${param.type}">
-                        ${pageNum + 1}
-                    </a>
-                </li>
-            </c:forEach>
+<%--            <c:forEach var="pageNum" begin="0" end="${boardList.totalPages - 1}">--%>
+<%--                <li class="${pageNum == boardList.number ? 'active' : ''}">--%>
+<%--                    <a href="${pageContext.request.contextPath}/board/list?page=${pageNum}&size=${boardList.size}&type=${param.type}">--%>
+<%--                        ${pageNum + 1}--%>
+<%--                    </a>--%>
+<%--                </li>--%>
+<%--            </c:forEach>--%>
 
-            <li class="${boardList.last ? 'disabled' : ''}">
-                <c:if test="${!boardList.last}">
-                    <a href="${pageContext.request.contextPath}/board/list?page=${boardList.number + 1}&size=${boardList.size}&type=${param.type}">다음</a>
-                </c:if>
-            </li>
-        </ul>
-    </div>
+<%--            <li class="${boardList.last ? 'disabled' : ''}">--%>
+<%--                <c:if test="${!boardList.last}">--%>
+<%--                    <a href="${pageContext.request.contextPath}/board/list?page=${boardList.number + 1}&size=${boardList.size}&type=${param.type}">다음</a>--%>
+<%--                </c:if>--%>
+<%--            </li>--%>
+<%--        </ul>--%>
+<%--    </div>--%>
 
-    <div class="button-group">
-        <a href="${pageContext.request.contextPath}/board/register" class="write-btn">글쓰기</a>
-    </div>
+<%--    <div class="button-group">--%>
+<%--        <a href="${pageContext.request.contextPath}/board/register" class="write-btn">글쓰기</a>--%>
+<%--    </div>--%>
 </div>
 </body>
 </html>
