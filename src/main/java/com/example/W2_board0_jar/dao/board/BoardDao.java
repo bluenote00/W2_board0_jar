@@ -12,4 +12,9 @@ public interface BoardDao {
      * 게시판 전체 리스트 조회
      */
     List<BoardDto> SelectBoardList(Map<String, Object> paramMap);
+
+    /**
+     * 게시판 전체 글 갯수
+     */
+    int SelectBoardCount(Map<String, Object> paramMap);
 }

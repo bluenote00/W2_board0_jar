@@ -29,4 +29,11 @@ public class BoardService {
     public List<BoardDto> SelectBoardList(Map<String, Object> paramMap) throws Exception {
         return dao.SelectBoardList(paramMap);
     }
+
+    /**
+     * 게시판 전체 글 갯수
+     */
+    public int SelectBoardCount(Map<String, Object> paramMap) throws Exception {
+        return dao.SelectBoardCount(paramMap);
+    }
 }

@@ -6,12 +6,24 @@
     <!-- 게시글 조회-->
     <select id="SelectBoardList" parameterType="java.util.Map" resultType ="com.example.W2_board0_jar.dto.board.BoardDto">
         /* com.example.W2_board0_jar.dao.board.BoardDao */
-        SELECT 		BOARD_TYPE      AS  boardType
+        SELECT 		CASE    BOARD_TYPE
+                    WHEN 'a01'  THEN '일반'
+                    WHEN 'a02'  THEN '공지'
+                    WHEN 'a03'  THEN 'Q&amp;A'
+                    WHEN 'a04'  THEN '자유'
+                    END             AS  boardType
              ,		BOARD_NUM       AS  boardNum
              ,		BOARD_TITLE     AS  boardTitle
              ,    	BOARD_COMMENT   AS  boardComment
         FROM 		BOARD
         ORDER BY 	BOARD_NUM       DESC
+    </select>
+
+    <!-- 게시글 갯수 카운트-->
+    <select id="SelectBoardCount" parameterType="java.util.Map">
+        /* com.example.W2_board0_jar.dao.board.BoardDao */
+        SELECT      COUNT(*)
+        FROM        BOARD
     </select>
 
 </mapper>

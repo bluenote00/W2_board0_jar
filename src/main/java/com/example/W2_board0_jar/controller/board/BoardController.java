@@ -39,12 +39,15 @@ public class BoardController {
         logger.info("+ Start " + className + ".boardList");
 
         List<BoardDto> boardList = boardService.SelectBoardList(paramMap);
+        int totalElements = boardService.SelectBoardCount(paramMap);
 
         model.addAttribute("boardList", boardList);
+        model.addAttribute("totalElements", totalElements);
         model.addAttribute("userId", session.getAttribute("userId"));
 
         logger.info("   - paramMap : " + boardList);
 
         return "list";
     }
+
 }
