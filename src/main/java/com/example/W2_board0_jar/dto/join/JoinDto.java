@@ -1,0 +1,114 @@
+package com.example.W2_board0_jar.dto.join;
+
+public class JoinDto {
+    private String userId;
+    private String userName;
+    private String phone1;
+    private String phone2;
+    private String phone3;
+    private String userAddr1;
+    private String userAddr2;
+    private String userCompany;
+    private String creator;
+    private String createTime;
+    private String modifier;
+    private String modifierTime;
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPhone1() {
+        return phone1;
+    }
+
+    public void setPhone1(String phone1) {
+        this.phone1 = phone1;
+    }
+
+    public String getPhone2() {
+        return phone2;
+    }
+
+    public void setPhone2(String phone2) {
+        this.phone2 = phone2;
+    }
+
+    public String getPhone3() {
+        return phone3;
+    }
+
+    public void setPhone3(String phone3) {
+        this.phone3 = phone3;
+    }
+
+    public String getUserAddr1() {
+        return userAddr1;
+    }
+
+    public void setUserAddr1(String userAddr1) {
+        this.userAddr1 = userAddr1;
+    }
+
+    public String getUserAddr2() {
+        return userAddr2;
+    }
+
+    public void setUserAddr2(String userAddr2) {
+        this.userAddr2 = userAddr2;
+    }
+
+    public String getUserCompany() {
+        return userCompany;
+    }
+
+    public void setUserCompany(String userCompany) {
+        this.userCompany = userCompany;
+    }
+
+    public String getCreator() {
+        return creator;
+    }
+
+    public void setCreator(String creator) {
+        this.creator = creator;
+    }
+
+    public String getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getModifier() {
+        return modifier;
+    }
+
+    public void setModifier(String modifier) {
+        this.modifier = modifier;
+    }
+
+    public String getModifierTime() {
+        return modifierTime;
+    }
+
+    public void setModifierTime(String modifierTime) {
+        this.modifierTime = modifierTime;
+    }
+
+
+}

@@ -4,6 +4,13 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <style>
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; }
+        input[type="text"], textarea { width: 100%; padding: 8px; }
+        textarea { min-height: 200px; }
+        .btn-group { margin-top: 20px; float: right;}
+    </style>
     <title>게시글 수정</title>
 </head>
 <body>

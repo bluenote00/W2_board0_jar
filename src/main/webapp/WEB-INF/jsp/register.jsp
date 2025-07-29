@@ -4,7 +4,14 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <style>
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; }
+        input[type="text"], textarea { width: 100%; padding: 8px; }
+        textarea { min-height: 200px; }
+    </style>
     <title>게시글 작성</title>
+
 </head>
 <body>
 <div class="container">
@@ -21,20 +28,20 @@
 <%--            </c:forEach>--%>
         </select>
 
-        <div class="form-group">
-            <label>Title</label>
-            <input type="text" name="boardTitle" value="${boardDTO.boardTitle}">
-        </div>
+<%--        <div class="form-group">--%>
+<%--            <label>Title</label>--%>
+<%--            <input type="text" name="boardTitle" value="${boardDTO.boardTitle}">--%>
+<%--        </div>--%>
 
-        <div class="form-group">
-            <label>Comment</label>
-            <textarea name="boardComment" value="${boardDTO.boardComment}"></textarea>
-        </div>
+<%--        <div class="form-group">--%>
+<%--            <label>Comment</label>--%>
+<%--            <textarea name="boardComment" value="${boardDTO.boardComment}"></textarea>--%>
+<%--        </div>--%>
 
-        <div class="form-group">
-            <label>Writer</label>
-            <input type="text" value="${boardDTO.creator}" readonly>
-        </div>
+<%--        <div class="form-group">--%>
+<%--            <label>Writer</label>--%>
+<%--            <input type="text" value="${boardDTO.creator}" readonly>--%>
+<%--        </div>--%>
 
         <div class="btn-group">
             <button type="submit">작성</button>

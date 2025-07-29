@@ -1,0 +1,15 @@
+package com.example.W2_board0_jar.dao.join;
+
+import com.example.W2_board0_jar.dto.join.JoinDto;
+import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
+import java.util.Map;
+
+@Mapper
+public interface JoinDao {
+    /**
+     * 게시글 작성
+     */
+    List<JoinDto> Join(Map<String, Object> paramMap);
+}

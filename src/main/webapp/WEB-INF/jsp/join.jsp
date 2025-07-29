@@ -4,7 +4,69 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            width: 500px;
+            margin: 0 auto;
+        }
+        .form-group {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        .form-group label {
+            width: 100px;
+            text-align: right;
+            margin-right: 15px;
+            font-weight: bold;
+        }
+        .form-control {
+            flex: 1;
+            padding: 5px;
+            border: 1px solid #ccc;
+        }
+        .phone-group {
+            display: flex;
+            gap: 5px;
+        }
+        .phone-select {
+            width: 70px;
+        }
+        .phone-input {
+            width: 60px;
+        }
+        .btn-check-id {
+            padding: 5px 10px;
+            margin-left: 5px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            cursor: pointer;
+        }
+        .btn-submit {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            float: right;
+        }
+        .error-message {
+            color: red;
+            font-size: 12px;
+            margin-left: 115px;
+        }
+        #passwordMatchMessage {
+            display: inline-block;
+            margin-left: 5px;
+            font-size: 0.8em;
+        }
+    </style>
     <title>회원가입</title>
+
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body>
@@ -12,7 +74,7 @@
     <h2>회원가입</h2>
 
     <div class="form-group">
-        <a href="${pageContext.request.contextPath}/board/list">List</a>
+        <a href="${pageContext.request.contextPath}/">List</a>
     </div>
     <form action="${pageContext.request.contextPath}/member/join" method="post" onsubmit="return validateForm()">
 

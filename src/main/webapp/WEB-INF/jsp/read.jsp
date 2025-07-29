@@ -4,7 +4,14 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <style>
+        .view-group { margin-bottom: 15px; border-bottom: 1px solid #ddd; }
+        .label { font-weight: bold; }
+        .content { margin: 10px 0; }
+        .btn-group { margin-top: 20px; float: right;}
+    </style>
     <title>게시글 상세</title>
+
 </head>
 <body>
 <div class="container">

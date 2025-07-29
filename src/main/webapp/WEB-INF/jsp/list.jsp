@@ -4,21 +4,63 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>게시판 목록</title>
     <style>
-        table { width: 100%; border-collapse: collapse; }
-        th, td { padding: 8px; border: 1px solid #ddd; }
-        .type-cell { width: 80px; }
-        .no-cell { width: 60px; }
-        .title-cell { width: auto; }
-        .pagination { display: flex; justify-content: center; margin: 20px 0; }
-        .pagination ul { display: flex; list-style: none; padding: 0; }
-        .pagination li { margin: 0 5px; }
-        .pagination li.active a { background-color: #007bff; color: white; }
-        .pagination li a { padding: 5px 10px; text-decoration: none; border: 1px solid #ddd; border-radius: 3px; }
-        .pagination li.disabled a { color: #ccc; pointer-events: none; }
-        .button-group { float: right; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            border: 1px solid #ddd;
+        }
+        .type-cell {
+            width: 80px;
+        }
+        .no-cell {
+            width: 60px;
+        }
+        .title-cell {
+            width: auto;
+        }
+        .pagination {
+            margin-top: 20px;
+        }
+        .board-type {
+            margin-bottom: 10px;
+        }
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .pagination ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+        }
+        .pagination li {
+            margin: 0 5px;
+        }
+        .pagination li.active a {
+            background-color: #007bff;
+            color: white;
+        }
+        .pagination li a {
+            padding: 5px 10px;
+            text-decoration: none;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+        }
+        .pagination li.disabled a {
+            color: #ccc;
+            pointer-events: none;
+        }
+        .button-group {
+            float: right;
+        }
     </style>
+    <title>게시판 목록</title>
+
 </head>
 <body>
 <div class="container">

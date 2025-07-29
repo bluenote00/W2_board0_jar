@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.W2_board0_jar.dao.comcode.ComcodeDao">
+    <!-- 코드 조회-->
+    <select id="SelectCommonCode" parameterType="java.util.Map" resultType ="com.example.W2_board0_jar.dto.comcode.ComcodeDto">
+        /* com.example.W2_board0_jar.dao.board.BoardDao */
+        SELECT      CODE_ID	    AS  codeId
+             ,		CODE_NAME   AS  codeName
+        FROM        COM_CODE
+        WHERE   =   #{codeType}
+    </select>
+</mapper>

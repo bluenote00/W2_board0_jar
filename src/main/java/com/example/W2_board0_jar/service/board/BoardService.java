@@ -14,12 +14,6 @@ import java.util.Map;
 @Service
 public class BoardService {
 
-    // Set logger
-    private final Logger logger = LogManager.getLogger(this.getClass());
-
-    // Get class name for logger
-    private final String className = this.getClass().toString();
-
     @Autowired
     BoardDao dao;
 
