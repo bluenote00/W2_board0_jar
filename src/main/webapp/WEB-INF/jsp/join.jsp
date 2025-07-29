@@ -76,7 +76,8 @@
     <div class="form-group">
         <a href="${pageContext.request.contextPath}/">List</a>
     </div>
-    <form action="${pageContext.request.contextPath}/member/join" method="post" onsubmit="return validateForm()">
+    <form id="joinForm"
+           action="${pageContext.request.contextPath}/member/join" method="post" onsubmit="return validateForm()">
 
         <c:if test="${not empty errorMessage}">
             <div class="error-message">${errorMessage}</div>
@@ -85,14 +86,14 @@
         <!-- ID -->
         <div class="form-group">
             <label for="userId">id</label>
-            <input type="text" class="form-control" id="userId" name="userId" value="${userJoinDTO.userId}">
+            <input type="text" class="form-control" id="userId" name="userId" value="${userId}">
             <button type="button" class="btn-check-id" onclick="checkDuplicateId()">중복확인</button>
         </div>
 
         <!-- Password -->
         <div class="form-group">
             <label for="userPw">pw</label>
-            <input type="password" class="form-control" id="userPw" name="userPw" value="${userJoinDTO.userPw}" oninput="checkPasswordMatch()">
+            <input type="password" class="form-control" id="userPw" name="userPw" value="${userPw}" oninput="checkPasswordMatch()">
         </div>
 
         <!-- Password Check -->
@@ -105,7 +106,7 @@
         <!-- Name -->
         <div class="form-group">
             <label for="userName">name</label>
-            <input type="text" class="form-control" id="userName" name="userName" value="${userJoinDTO.userName}">
+            <input type="text" class="form-control" id="userName" name="userName" value="${userName}">
         </div>
 
         <!-- Phone -->
@@ -118,31 +119,31 @@
                         <option value="${phone.codeName}">${phone.codeName}</option>
                     </c:forEach>
                 </select>
-                <input type="text" class="phone-input" name="userPhone2" value="${userJoinDTO.userPhone2}" maxlength="4">
-                <input type="text" class="phone-input" name="userPhone3" value="${userJoinDTO.userPhone3}" maxlength="4">
+                <input type="text" class="phone-input" name="userPhone2" value="${userPhone2}" maxlength="4">
+                <input type="text" class="phone-input" name="userPhone3" value="${userPhone3}" maxlength="4">
             </div>
         </div>
 
         <!-- Address 1 -->
         <div class="form-group">
             <label for="userAddr1">postNo</label>
-            <input type="text" class="form-control" id="userAddr1" name="userAddr1" value="${userJoinDTO.userAddr1}">
+            <input type="text" class="form-control" id="userAddr1" name="userAddr1" value="${userAddr1}">
             <input type="button" onclick="PostCode()" value="우편번호 찾기">
         </div>
 
         <!-- Address 2 -->
         <div class="form-group">
             <label for="userAddr2">address</label>
-            <input type="text" class="form-control" id="userAddr2" name="userAddr2" value="${userJoinDTO.userAddr2}" placeholder="상세주소를 입력해주세요">
+            <input type="text" class="form-control" id="userAddr2" name="userAddr2" value="${userAddr2}" placeholder="상세주소를 입력해주세요">
         </div>
 
         <!-- Company -->
         <div class="form-group">
             <label for="userCompany">company</label>
-            <input type="text" class="form-control" id="userCompany" name="userCompany" value="${userJoinDTO.userCompany}">
+            <input type="text" class="form-control" id="userCompany" name="userCompany" value="${userCompany}">
         </div>
 
-        <button type="submit" class="btn-submit">Join</button>
+        <button type="submit" class="btn-submit" onclick="joinSubmit()">Join</button>
     </form>
 </div>
 
@@ -182,7 +183,7 @@
                 alert('전화번호 형식이 올바르지 않습니다.');
                 return false;
             }
-        }
+       }
         return true;
     }
 
@@ -253,6 +254,13 @@
                 document.getElementById('userAddr2').focus();
             }
         }).open();
+    }
+
+    function joinSubmit() {
+        document.getElementById('joinForm').submit();
+
+        alert("가입이 완료되었습니다.");
+        return 'list';
     }
 </script>
 </body>

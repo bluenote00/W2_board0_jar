@@ -14,6 +14,8 @@ public class JoinDto {
     private String modifier;
     private String modifierTime;
 
+    public JoinDto() {}
+
     public String getUserId() {
         return userId;
     }

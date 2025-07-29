@@ -9,7 +9,12 @@ import java.util.Map;
 @Mapper
 public interface JoinDao {
     /**
-     * 게시글 작성
+     * 회원가입
      */
-    List<JoinDto> Join(Map<String, Object> paramMap);
+    void Join(Map<String, Object> paramMap);
+
+    /**
+     * 아이디 중복 체크
+     */
+    int checkDuplicateId(Map<String, Object> paramMap);
 }
