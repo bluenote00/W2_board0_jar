@@ -46,6 +46,7 @@ public class LoginController {
 
         if ("success".equals(result.get("status"))) {
             session.setAttribute("userId", joinDto.getUserId());
+            session.setAttribute("userName", joinDto.getUserName());
             return "redirect:/";
 
         } else {
@@ -57,15 +58,11 @@ public class LoginController {
     /**
      * 로그아웃
      */
+    @RequestMapping(value = "/member/logout")
+    public String loginOut(HttpSession session) {
 
-//    @RequestMapping(value = "/loginOut.do")
-//    public ModelAndView loginOut(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
-//
-//        ModelAndView mav = new ModelAndView();
-//        session.invalidate();
-//
-//        mav.setViewName("redirect:/login.do");
-//
-//        return mav;
-//    }
+        session.invalidate();
+
+        return "redirect:/";
+    }
 }

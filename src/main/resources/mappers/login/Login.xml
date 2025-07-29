@@ -8,6 +8,7 @@
         <select id="selectUserByLoginId" parameterType="string" resultType="map">
             SELECT      USER_ID
                  ,      USER_PW
+                 ,      USER_NAME
             FROM        USER_INFO
             WHERE       USER_ID   =   #{userId}
         </select>
