@@ -15,16 +15,16 @@ public class JoinService {
     JoinDao joinDao;
 
     /**
-     * 가입하기
-     */
-    public void Join(Map<String, Object> paramMap) throws Exception {
-        return joinDao.Join(paramMap);
-    }
-
-    /**
      * 아이디 중복 체크
      */
     public int checkDuplicateId(Map<String, Object> paramMap) throws Exception {
         return joinDao.checkDuplicateId(paramMap);
     }
+
+    /**
+     * 가입하기
+     */
+//    public void Join(Map<String, Object> paramMap) throws Exception {
+//        return joinDao.Join(paramMap);
+//    }
 }

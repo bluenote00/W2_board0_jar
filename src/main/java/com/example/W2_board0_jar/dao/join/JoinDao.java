@@ -8,13 +8,14 @@ import java.util.Map;
 
 @Mapper
 public interface JoinDao {
-    /**
-     * 회원가입
-     */
-    void Join(Map<String, Object> paramMap);
 
     /**
      * 아이디 중복 체크
      */
     int checkDuplicateId(Map<String, Object> paramMap);
+
+    /**
+     * 회원가입
+     */
+    void Join(Map<String, Object> paramMap);
 }

@@ -196,8 +196,8 @@
 
         fetch(`/member/check-id?userId=${userId}`)
             .then(response => response.json())
-            .then(data => {
-                if (data.available) {
+            .then(duplicateCount => {
+                if (duplicateCount === 0) {
                     alert('사용 가능한 아이디입니다.');
                     idChecked = true;
                 } else {

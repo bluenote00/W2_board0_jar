@@ -7,8 +7,8 @@
     <!-- 로그인 ID 중복 체크 -->
     <select id="checkDuplicateId" parameterType="map" resultType="int">
         SELECT      COUNT(*)
-        FROM        tb_user
-        WHERE       USER_ID = #{login_id}
+        FROM        USER_INFO
+        WHERE       USER_ID = #{userId}
     </select>
 
     <!-- 회원가입 -->
