@@ -24,7 +24,7 @@ public class JoinService {
     /**
      * 가입하기
      */
-//    public void Join(Map<String, Object> paramMap) throws Exception {
-//        return joinDao.Join(paramMap);
-//    }
+    public int Join(Map<String, Object> paramMap) throws Exception {
+        return joinDao.Join(paramMap);
+    }
 }

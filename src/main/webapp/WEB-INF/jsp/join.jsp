@@ -115,9 +115,6 @@
             <div class="phone-group">
                 <select class="phone-select" name="userPhone1">
                     <option value="">선택</option>
-                    <c:forEach var="phone" items="${phoneNumbers}">
-                        <option value="${phone.codeName}">${phone.codeName}</option>
-                    </c:forEach>
                 </select>
                 <input type="text" class="phone-input" name="userPhone2" value="${userPhone2}" maxlength="4">
                 <input type="text" class="phone-input" name="userPhone3" value="${userPhone3}" maxlength="4">
@@ -143,7 +140,7 @@
             <input type="text" class="form-control" id="userCompany" name="userCompany" value="${userCompany}">
         </div>
 
-        <button type="submit" class="btn-submit" onclick="joinSubmit()">Join</button>
+        <button type="submit" class="btn-submit">Join</button>
     </form>
 </div>
 
@@ -190,14 +187,12 @@
     function checkDuplicateId() {
         const userId = document.getElementById('userId').value;
 
-        console.log(userId);
         if (!userId) {
             alert('아이디를 입력해주세요.');
             return;
         }
-        console.log(userId);
 
-        fetch(`/member/check-id?userId=${userId}`)
+        fetch(`${pageContext.request.contextPath}/member/check-id?userId=${userId}`)
             .then(response => response.json())
             .then(duplicateCount => {
                 if (duplicateCount < 1) {
@@ -242,6 +237,29 @@
         return regex.test(password);
     }
 
+        document.addEventListener("DOMContentLoaded", function() {
+            loadPhoneNumbers();
+            });
+
+        function loadPhoneNumbers() {
+            fetch('${pageContext.request.contextPath}/selectComcode?codeType=phone')
+            .then(response => response.json())
+            .then(phoneNumbers => {
+                const select = document.querySelector('select[name="userPhone1"]');
+                select.innerHTML = '<option value="">선택</option>';
+
+                phoneNumbers.forEach(phone => {
+                    const option = document.createElement('option');
+                    option.value = phone.codeName;
+                    option.textContent = phone.codeName;
+                    select.appendChild(option);
+                });
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    }
+
     function PostCode() {
         new daum.Postcode({
             oncomplete: function (data) {
@@ -261,9 +279,6 @@
 
     function joinSubmit() {
         document.getElementById('joinForm').submit();
-
-        alert("가입이 완료되었습니다.");
-        return 'list';
     }
 </script>
 </body>

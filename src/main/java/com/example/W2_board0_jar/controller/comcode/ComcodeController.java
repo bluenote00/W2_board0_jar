@@ -8,9 +8,12 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -29,18 +32,14 @@ public class ComcodeController {
     /**
      * 코드 조회
      */
-    @RequestMapping("/selectComcode")
-    public String SelectCommonCode(Model model, @RequestParam Map<String, Object> paramMap, HttpSession session) throws Exception {
+    @GetMapping("/selectComcode")
+    @ResponseBody
+    public List<ComcodeDto> getCommonCode(@RequestParam("codeType") String codeType) throws Exception {
+        Map<String, Object> paramMap = new HashMap<>();
 
-        logger.info("+ Start " + className + ".comcodeList");
+        paramMap.put("codeType", codeType);
 
-        List<ComcodeDto> comcodeList = comcodeService.SelectCommonCode(paramMap);
-
-        model.addAttribute("comcodeList", comcodeList);
-
-        logger.info("   - paramMap : " + paramMap);
-
-        return "list";
+        return comcodeService.SelectCommonCode(paramMap);
     }
 
 }

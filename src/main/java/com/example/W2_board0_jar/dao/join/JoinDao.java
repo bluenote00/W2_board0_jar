@@ -17,5 +17,5 @@ public interface JoinDao {
     /**
      * 회원가입
      */
-    void Join(Map<String, Object> paramMap);
+    int Join(Map<String, Object> paramMap);
 }

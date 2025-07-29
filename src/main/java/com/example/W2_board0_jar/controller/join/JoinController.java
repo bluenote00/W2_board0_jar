@@ -42,7 +42,8 @@ public class JoinController {
     @ResponseBody
     public int checkDuplicateId(@RequestParam("userId") String userId) throws Exception {
 
-        System.out.println("111111111111" + userId);
+        System.out.println(userId);
+
         logger.info("+ Start " + userId + ".checkDuplicateId");
 
         Map<String, Object> checkMap = new HashMap<>();
@@ -56,19 +57,24 @@ public class JoinController {
     /**
      * 가입하기
      */
-//    @PostMapping("/member/join")
-//    public String Join(Model model, @RequestParam Map<String, Object> paramMap, HttpSession session) throws Exception {
-//
-//        logger.info("+ Start " + className + ".Join");
-//        logger.info("+ Start " + paramMap + ".Join");
-//
-//        int userJoin = joinService.Join(paramMap);
-//
-//        model.addAttribute("userJoin", userJoin);
-//
-//        logger.info("   - paramMap : " + paramMap);
-//
-//        return "join";
-//    }
+    @PostMapping("/member/join")
+    public String Join(Model model, @RequestParam Map<String, Object> paramMap, HttpSession session) throws Exception {
+
+        logger.info("+ Start " + className + ".Join");
+        logger.info("+ Start " + paramMap + ".Join");
+
+        try {
+            joinService.Join(paramMap);
+
+            return "redirect:/";
+
+        } catch (Exception e) {
+            model.addAttribute(paramMap);
+
+            return "join";
+        }
+    }
+
+
 
 }

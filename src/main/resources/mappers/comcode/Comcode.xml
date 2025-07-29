@@ -5,10 +5,10 @@
 <mapper namespace="com.example.W2_board0_jar.dao.comcode.ComcodeDao">
     <!-- 코드 조회-->
     <select id="SelectCommonCode" parameterType="java.util.Map" resultType ="com.example.W2_board0_jar.dto.comcode.ComcodeDto">
-        /* com.example.W2_board0_jar.dao.board.BoardDao */
+        /* com.example.W2_board0_jar.dao.comcode.ComcodeDao */
         SELECT      CODE_ID	    AS  codeId
              ,		CODE_NAME   AS  codeName
         FROM        COM_CODE
-        WHERE   =   #{codeType}
+        WHERE       CODE_TYPE = #{codeType}
     </select>
 </mapper>
