@@ -42,6 +42,7 @@ public class JoinController {
     @ResponseBody
     public int checkDuplicateId(@RequestParam("userId") String userId) throws Exception {
 
+        System.out.println("111111111111" + userId);
         logger.info("+ Start " + userId + ".checkDuplicateId");
 
         Map<String, Object> checkMap = new HashMap<>();

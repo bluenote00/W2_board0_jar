@@ -189,15 +189,18 @@
 
     function checkDuplicateId() {
         const userId = document.getElementById('userId').value;
+
+        console.log(userId);
         if (!userId) {
             alert('아이디를 입력해주세요.');
             return;
         }
+        console.log(userId);
 
         fetch(`/member/check-id?userId=${userId}`)
             .then(response => response.json())
             .then(duplicateCount => {
-                if (duplicateCount === 0) {
+                if (duplicateCount < 1) {
                     alert('사용 가능한 아이디입니다.');
                     idChecked = true;
                 } else {
