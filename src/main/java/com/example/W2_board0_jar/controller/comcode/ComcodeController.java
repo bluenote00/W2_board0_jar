@@ -34,7 +34,7 @@ public class ComcodeController {
      */
     @GetMapping("/selectComcode")
     @ResponseBody
-    public List<ComcodeDto> getCommonCode(@RequestParam("codeType") String codeType) throws Exception {
+    public List<ComcodeDto> SelectCommonCode(@RequestParam("codeType") String codeType) throws Exception {
         Map<String, Object> paramMap = new HashMap<>();
 
         paramMap.put("codeType", codeType);

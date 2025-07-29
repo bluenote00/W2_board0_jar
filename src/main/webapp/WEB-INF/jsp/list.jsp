@@ -66,7 +66,7 @@
 <div class="container">
     <div class="header">
         <c:if test="${empty sessionScope.user}">
-            <a href="${pageContext.request.contextPath}/member/movelogin">Login</a>
+            <a href="${pageContext.request.contextPath}/member/moveLogin">Login</a>
             <a href="${pageContext.request.contextPath}/member/moveJoin">Join</a>
         </c:if>
         <c:if test="${not empty sessionScope.user}">

@@ -3,6 +3,7 @@ package com.example.W2_board0_jar.dto.join;
 public class JoinDto {
     private String userId;
     private String userName;
+    private String userPw;
     private String phone1;
     private String phone2;
     private String phone3;
@@ -30,6 +31,14 @@ public class JoinDto {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public String getUserPw() {
+        return userPw;
+    }
+
+    public void setUserPw(String userPw) {
+        this.userPw = userPw;
     }
 
     public String getPhone1() {
