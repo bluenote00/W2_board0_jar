@@ -37,9 +37,15 @@ public class BoardController {
         List<BoardDto> boardList = boardService.SelectBoardList(paramMap);
         int totalElements = boardService.SelectBoardCount(paramMap);
 
+        paramMap.put("userId", session.getAttribute("userId"));
+        paramMap.put("creator", session.getAttribute("creator"));
+        paramMap.put("userName", session.getAttribute("userName"));
+
         model.addAttribute("boardList", boardList);
         model.addAttribute("totalElements", totalElements);
         model.addAttribute("userId", session.getAttribute("userId"));
+        model.addAttribute("creator", session.getAttribute("creator"));
+        model.addAttribute("userName", session.getAttribute("userName"));
 
         logger.info("   - paramMap : " + paramMap);
 
@@ -54,14 +60,16 @@ public class BoardController {
 
         logger.info("+ Start " + className + ".boardDetail");
 
-        paramMap.put("boardTypeName", paramMap.get("boardTypeName"));
-        paramMap.put("boardType", paramMap.get("boardType"));
-        paramMap.put("boardNum", paramMap.get("boardNum"));
+        paramMap.put("userId", session.getAttribute("userId"));
+        paramMap.put("creator", session.getAttribute("creator"));
+        paramMap.put("userName", session.getAttribute("userName"));
 
         List<BoardDto> boardDetail = boardService.SelectBoardDetail(paramMap);
 
         model.addAttribute("boardDetail", boardDetail);
         model.addAttribute("userId", session.getAttribute("userId"));
+        model.addAttribute("creator", session.getAttribute("creator"));
+        model.addAttribute("userName", session.getAttribute("userName"));
 
         logger.info("   - paramMap : " + paramMap);
 
@@ -72,21 +80,38 @@ public class BoardController {
      * 게시글 작성 화면
      */
     @RequestMapping("/board/register")
-    public String MoverWrite(Model model, @RequestParam Map<String, Object> paramMap, HttpSession session) throws Exception {
+    public String MoveWrite(Model model, @RequestParam Map<String, Object> paramMap, HttpSession session) throws Exception {
 
-        logger.info("+ Start " + className + ".boardWrite");
+        logger.info("+ Start " + className + ".MoveWrite");
 
-//        paramMap.put("boardType", paramMap.get("boardType"));
-//        paramMap.put("boardNum", paramMap.get("boardNum"));
+        paramMap.put("userId", session.getAttribute("userId"));
+        paramMap.put("creator", session.getAttribute("creator"));
+        paramMap.put("userName", session.getAttribute("userName"));
 
-//        List<BoardDto> boardWrite = boardService.BoardWrite(paramMap);
-
-//        model.addAttribute("boardWrite", boardWrite);
         model.addAttribute("userId", session.getAttribute("userId"));
+        model.addAttribute("creator", session.getAttribute("creator"));
+        model.addAttribute("userName", session.getAttribute("userName"));
 
-//        logger.info("   - paramMap : " + boardWrite);
+
+        logger.info("   - paramMap : " + paramMap);
 
         return "register";
+    }
+
+    /**
+     * 게시글 작성
+     */
+    @RequestMapping("/board/boardwrite")
+    public String BoardWrite(Model model, @RequestParam Map<String, Object> paramMap, HttpSession session) throws Exception {
+
+        logger.info("+ Start " + className + paramMap);
+
+        paramMap.put("userId", session.getAttribute("userId"));
+        paramMap.put("creator", session.getAttribute("creator"));
+
+        boardService.BoardWrite(paramMap);
+
+        return "redirect:/";
     }
 
 }

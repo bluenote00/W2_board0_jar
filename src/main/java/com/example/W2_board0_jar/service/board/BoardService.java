@@ -41,7 +41,7 @@ public class BoardService {
     /**
      * 게시글 작성
      */
-    public List<BoardDto> BoardWrite(Map<String, Object> paramMap) throws Exception {
+    public int BoardWrite(Map<String, Object> paramMap) throws Exception {
         return dao.BoardWrite(paramMap);
     }
 }

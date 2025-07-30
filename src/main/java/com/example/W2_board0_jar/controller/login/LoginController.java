@@ -45,8 +45,9 @@ public class LoginController {
         Map<String, Object> result = loginService.login(joinDto);
 
         if ("success".equals(result.get("status"))) {
-            session.setAttribute("userId", joinDto.getUserId());
-            session.setAttribute("userName", joinDto.getUserName());
+            session.setAttribute("userId", result.get("userId"));
+            session.setAttribute("userName", result.get("userName"));
+            session.setAttribute("creator", result.get("creator"));
             return "redirect:/";
 
         } else {

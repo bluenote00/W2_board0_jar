@@ -9,8 +9,8 @@
         SELECT         BOARD_TYPE       AS boardType
                ,        CASE BOARD_TYPE
                             WHEN 'a01' THEN '일반'
-                            WHEN 'a02' THEN '공지'
-                            WHEN 'a03' THEN 'QA'
+                            WHEN 'a02' THEN 'QA'
+                            WHEN 'a03' THEN '익명'
                             WHEN 'a04' THEN '자유'
                             ELSE '기타'
                         END             AS boardTypeName
@@ -18,8 +18,8 @@
                ,        BOARD_TITLE     AS boardTitle
                ,        BOARD_COMMENT   AS boardComment
         FROM            BOARD
-        <if test="codeType !=null and codeType!=''">
-        WHERE           BOARD_TYPE = #{codeType}
+        <if test="codeId !=null and codeId!=''">
+        WHERE           BOARD_TYPE = #{codeId}
         </if>
         ORDER BY        BOARD_NUM DESC
     </select>
@@ -29,8 +29,8 @@
         /* com.example.W2_board0_jar.dao.board.BoardDao */
         SELECT      COUNT(*)
         FROM        BOARD
-        <if test="codeType !=null and codeType!=''">
-        WHERE           BOARD_TYPE = #{codeType}
+        <if test="codeId !=null and codeId!=''">
+        WHERE           BOARD_TYPE = #{codeId}
         </if>
     </select>
 
@@ -41,8 +41,8 @@
         SELECT         BOARD_TYPE       AS boardType
                  ,        CASE BOARD_TYPE
                           WHEN 'a01' THEN '일반'
-                          WHEN 'a02' THEN '공지'
-                          WHEN 'a03' THEN 'QA'
+                          WHEN 'a02' THEN 'QA'
+                          WHEN 'a03' THEN '익명'
                           WHEN 'a04' THEN '자유'
                           ELSE '기타'
                     END             AS  boardTypeName
@@ -56,17 +56,26 @@
     </select>
 
     <!-- 게시글 작성 -->
-    <insert id="BoardWrite" parameterType="java.util.Map">
+    <insert id="BoardWrite" parameterType="map">
         /* com.example.W2_board0_jar.dao.board.BoardDao */
-        SELECT 	 	BOARD_TYPE      AS  boardType
-             ,		BOARD_NUM       AS  boardNum
-             ,		BOARD_TITLE     AS  boardTitle
-             ,    	BOARD_COMMENT   AS  boardComment
-             ,    	CREATOR 		AS  creator
-        FROM 		BOARD
-        WHERE       BOARD_TYPE      =   #{boardType}
-          AND       BOARD_NUM       =   #{boardNum}
+        <selectKey keyProperty="boardNum" resultType="int" order="BEFORE">
+            SELECT NVL(MAX(BOARD_NUM), 0) + 1 AS boardNum FROM BOARD
+        </selectKey>
+        INSERT INTO 	BOARD
+        (
+                        BOARD_NUM
+                ,       BOARD_TYPE
+                ,		BOARD_TITLE
+                ,		BOARD_COMMENT
+                ,		CREATOR
+                ,       CREATE_TIME
+        ) VALUES (
+                        #{boardNum}
+                 ,      #{boardType}
+                 ,		#{boardTitle}
+                 ,		#{boardComment}
+                 ,		#{userId}
+                 ,		SYSDATE
+                 )
     </insert>
-
-
 </mapper>

@@ -9,6 +9,7 @@
             SELECT      USER_ID
                  ,      USER_PW
                  ,      USER_NAME
+                 ,      CREATOR
             FROM        USER_INFO
             WHERE       USER_ID   =   #{userId}
         </select>

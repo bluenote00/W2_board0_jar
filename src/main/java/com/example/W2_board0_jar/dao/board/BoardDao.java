@@ -26,5 +26,5 @@ public interface BoardDao {
     /**
      * 게시글 작성
      */
-    List<BoardDto> BoardWrite(Map<String, Object> paramMap);
+    int BoardWrite(Map<String, Object> paramMap);
 }

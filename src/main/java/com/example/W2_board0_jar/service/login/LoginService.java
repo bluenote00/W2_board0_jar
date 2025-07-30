@@ -35,6 +35,11 @@ public class LoginService {
             if (password.equals(dbPassword)) {
                 resultMap.put("status", "success");
                 resultMap.put("message", "로그인되었습니다.");
+
+                resultMap.put("userId", user.get("USER_ID"));
+                resultMap.put("userName", user.get("USER_NAME"));
+                resultMap.put("creator", user.get("CREATOR"));
+
             } else {
                 resultMap.put("status", "fail");
                 resultMap.put("message", "잘못된 비밀번호입니다.");

@@ -16,32 +16,32 @@
 <body>
 <div class="container">
     <h2>게시글 작성</h2>
-    <form action="${pageContext.request.contextPath}/board/register" method="post">
+    <form action="${pageContext.request.contextPath}/board/boardwrite" method="post">
+        <input type="hidden" id="userId" name="userId" value ="${userId}"/>
+        <input type="hidden" id="creator" name="creator" value ="${creator}"/>
+        <input type="hidden" id="userName" name="userName" value ="${userName}"/>
+
 
         <label for="Type">게시글 타입</label>
-        <select id="Type" name="boardType" required>
-            <option value="" disabled selected>게시글 타입 선택</option>
-<%--            <c:forEach var="menu" items="${comCodes}">--%>
-<%--                <option value="${menu.codeName}" <c:if test="${menu.codeName == boardDTO.boardType}">selected</c:if>>--%>
-<%--                    ${menu.codeName}--%>
-<%--                </option>--%>
-<%--            </c:forEach>--%>
+
+        <select id="Type" name="boardType">
+            <option value="">게시글 타입 선택</option>
         </select>
 
-<%--        <div class="form-group">--%>
-<%--            <label>Title</label>--%>
-<%--            <input type="text" name="boardTitle" value="${boardDTO.boardTitle}">--%>
-<%--        </div>--%>
+        <div class="form-group">
+            <label>Title</label>
+            <input type="text" name="boardTitle" value="${boardDto.boardTitle}">
+        </div>
 
-<%--        <div class="form-group">--%>
-<%--            <label>Comment</label>--%>
-<%--            <textarea name="boardComment" value="${boardDTO.boardComment}"></textarea>--%>
-<%--        </div>--%>
+        <div class="form-group">
+            <label>Comment</label>
+            <textarea name="boardComment" value="${boardDto.boardComment}"></textarea>
+        </div>
 
-<%--        <div class="form-group">--%>
-<%--            <label>Writer</label>--%>
-<%--            <input type="text" value="${boardDTO.creator}" readonly>--%>
-<%--        </div>--%>
+        <div class="form-group">
+            <label>Writer</label>
+            <input type="text" value="${sessionScope.creator}" readonly>
+        </div>
 
         <div class="btn-group">
             <button type="submit">작성</button>
@@ -49,5 +49,31 @@
         </div>
     </form>
 </div>
+
+<script>
+
+    document.addEventListener("DOMContentLoaded", function() {
+        loadBoardType();
+    });
+
+    function loadBoardType() {
+        fetch('${pageContext.request.contextPath}/selectComcode?codeType=menu')
+            .then(response => response.json())
+            .then(boardType => {
+                const select = document.querySelector('select[name="boardType"]');
+                select.innerHTML = '<option value="">게시글 타입 선택</option>';
+
+                boardType.forEach(menu => {
+                    const option = document.createElement('option');
+                    option.value = menu.codeId;
+                    option.textContent = menu.codeName;
+                    select.appendChild(option);
+                });
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    }
+</script>
 </body>
 </html>
