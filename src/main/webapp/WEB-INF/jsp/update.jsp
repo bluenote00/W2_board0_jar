@@ -16,27 +16,32 @@
 <body>
 <h2>게시글 수정</h2>
 <div class="container">
-    <form action="${pageContext.request.contextPath}/board/update/${boardDTO.boardType}/${boardDTO.boardNum}" method="post">
-        <div class="form-group">
-            <label>Title</label>
-            <input type="text" name="boardTitle" value="${boardDTO.boardTitle}">
-        </div>
+    <c:forEach var="boardDto" items="${boardDetail}">
+        <form action="${pageContext.request.contextPath}/board/BoardModify" method="post">
+            <div class="form-group">
+                <input type="hidden" name="boardType" value="${boardDto.boardType}">
+                <input type="hidden" name="boardNum" value="${boardDto.boardNum}">
 
-        <div class="form-group">
-            <label>Comment</label>
-            <textarea name="boardComment">${boardDTO.boardComment}</textarea>
-        </div>
+                <label>Title</label>
+                <input type="text" name="boardTitle" value="${boardDto.boardTitle}">
+            </div>
 
-        <div class="form-group">
-            <label>Writer</label>
-            <input type="text" value="${boardDTO.creator}" readonly>
-        </div>
+            <div class="form-group">
+                <label>Comment</label>
+                <textarea name="boardComment">${boardDto.boardComment}</textarea>
+            </div>
 
-        <div class="btn-group">
-            <a href="${pageContext.request.contextPath}/board/list" class="btn">List</a>
-            <button type="submit">Update</button>
-        </div>
-    </form>
+            <div class="form-group">
+                <label>Writer</label>
+                <input type="text" value="${boardDto.creator}" readonly>
+            </div>
+
+            <div class="btn-group">
+                <a href="${pageContext.request.contextPath}/board/list" class="btn">List</a>
+                <button type="submit">Update</button>
+            </div>
+        </form>
+    </c:forEach>
 </div>
 </body>
 </html>

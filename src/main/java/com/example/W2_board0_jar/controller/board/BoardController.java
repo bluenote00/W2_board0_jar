@@ -8,9 +8,12 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -92,7 +95,6 @@ public class BoardController {
         model.addAttribute("creator", session.getAttribute("creator"));
         model.addAttribute("userName", session.getAttribute("userName"));
 
-
         logger.info("   - paramMap : " + paramMap);
 
         return "register";
@@ -102,7 +104,7 @@ public class BoardController {
      * 게시글 작성
      */
     @RequestMapping("/board/boardwrite")
-    public String BoardWrite(Model model, @RequestParam Map<String, Object> paramMap, HttpSession session) throws Exception {
+    public String BoardWrite(@RequestParam Map<String, Object> paramMap, HttpSession session) throws Exception {
 
         logger.info("+ Start " + className + paramMap);
 
@@ -114,4 +116,56 @@ public class BoardController {
         return "redirect:/";
     }
 
+    /**
+     * 게시글 수정 화면
+     */
+    @RequestMapping("/board/update/{boardType}/{boardNum}")
+    public String MoveUpdate(Model model, @PathVariable("boardType") String boardType,
+                             @PathVariable("boardNum") int boardNum, HttpSession session) throws Exception {
+
+        logger.info("+ Start " + className + ".MoveWrite");
+
+        Map<String, Object> paramMap = new HashMap<>();
+
+        paramMap.put("boardType", boardType);
+        paramMap.put("boardNum", boardNum);
+        paramMap.put("userId", session.getAttribute("userId"));
+        paramMap.put("creator", session.getAttribute("creator"));
+
+        List<BoardDto> boardDetail = boardService.SelectBoardDetail(paramMap);
+
+        model.addAttribute("boardDetail", boardDetail);
+        model.addAttribute("userId", session.getAttribute("userId"));
+        model.addAttribute("creator", session.getAttribute("creator"));
+
+        logger.info("   - paramMap : " + paramMap);
+
+        return "update";
+    }
+
+    /**
+     * 게시글 수정
+     */
+    @RequestMapping("/board/BoardModify")
+    public String BoardModify(Model model, @RequestParam Map<String, Object> paramMap, HttpSession session) throws Exception {
+
+        logger.info("+ Start " + className + ".BoardModify");
+
+        paramMap.put("userId", session.getAttribute("userId"));
+        paramMap.put("creator", session.getAttribute("creator"));
+
+        logger.info("   - paramMap : " + paramMap);
+
+        try {
+            boardService.updateBoard(paramMap);
+
+        } catch (Exception e) {
+            throw e;
+        }
+
+        logger.info("   - paramMap : " + paramMap);
+
+        return "redirect:/";
+
+    }
 }

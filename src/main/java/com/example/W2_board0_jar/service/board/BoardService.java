@@ -44,4 +44,11 @@ public class BoardService {
     public int BoardWrite(Map<String, Object> paramMap) throws Exception {
         return dao.BoardWrite(paramMap);
     }
+
+    /**
+     * 게시글 수정
+     */
+    public void updateBoard(Map<String, Object> paramMap) throws Exception {
+        dao.updateBoard(paramMap);
+    }
 }

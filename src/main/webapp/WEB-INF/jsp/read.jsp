@@ -28,11 +28,15 @@
             <span class="label">Writer:</span>
             <div class="content"><c:out value="${boardDto.creator}"/></div>
         </div>
+
+        <div class="btn-group">
+            <a href="${pageContext.request.contextPath}/" class="btn">List</a>
+
+            <c:if test="${not empty sessionScope.userId}">
+                <a href="${pageContext.request.contextPath}/board/update/${boardDto.boardType}/${boardDto.boardNum}" class="btn">Update</a>
+            </c:if>
+        </div>
     </c:forEach>
-    <div class="btn-group">
-        <a href="${pageContext.request.contextPath}/" class="btn">List</a>
-        <a href="${pageContext.request.contextPath}/board/update/${boardDto.boardType}/${boardDto.boardNum}" class="btn">Update</a>
-    </div>
 </div>
 </body>
 </html>

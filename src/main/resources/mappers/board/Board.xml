@@ -78,4 +78,16 @@
                  ,		SYSDATE
                  )
     </insert>
+
+    <!-- 게시글 수정 -->
+    <update id="updateBoard" parameterType="map">
+        UPDATE 		BOARD
+        SET
+                    BOARD_TYPE      =   #{boardType}
+          ,         BOARD_TITLE	    = 	#{boardTitle}
+          ,	        BOARD_COMMENT 	= 	#{boardComment}
+          ,	        MODIFIER 		= 	#{userId}
+          ,  	    MODIFIED_TIME 	=   SYSDATE
+        WHERE 		BOARD_NUM       =   #{boardNum}
+    </update>
 </mapper>
