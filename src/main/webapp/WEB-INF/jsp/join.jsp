@@ -189,6 +189,8 @@
             return;
         }
 
+        console.log(userId);
+
         fetch(`${pageContext.request.contextPath}/member/check-id?userId=${userId}`)
             .then(response => response.json())
             .then(duplicateCount => {
@@ -200,6 +202,7 @@
                     idChecked = false;
                 }
             });
+        console.log("실제 요청 URL:", `${pageContext.request.contextPath}/member/check-id?userId=${userId}`);
     }
 
     function checkPasswordMatch() {

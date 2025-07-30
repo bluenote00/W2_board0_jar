@@ -97,18 +97,23 @@
         </tbody>
     </table>
 
-<%--    <form action="${pageContext.request.contextPath}/board/list" method="get">--%>
-<%--        <div class="board-type">--%>
-<%--            <c:forEach var="menu" items="${menuCode}">--%>
-<%--                <input type="radio" name="type" value="${menu.codeId}"--%>
-<%--                       id="type-${menu.codeId}" <c:if test="${selectedType == menu.codeId}">checked</c:if>>--%>
-<%--                <label for="type-${menu.codeId}">${menu.codeName}</label>--%>
-<%--            </c:forEach>--%>
-<%--        </div>--%>
+    <form action="${pageContext.request.contextPath}/board/list" method="get">
+
+
+
+
+        <div class="board-type">
+            <c:forEach var="menu" items="${menuCode}">
+                <input type="radio" name="boardType" value="${menu.codeId}"
+                       id="type-${menu.codeId}"
+                <c:if test="${selectedType == menu.codeId}">checked</c:if>>
+                <label for="type-${menu.codeId}"></label>${menu.codeName}
+            </c:forEach>
+        </div>
 <%--        <input type="hidden" name="page" value="${boardList.number}">--%>
 <%--        <input type="hidden" name="size" value="${boardList.size}">--%>
-<%--        <button type="submit">조회</button>--%>
-<%--    </form>--%>
+        <button type="submit">조회</button>
+    </form>
 
 
 <%--    <div class="pagination">--%>
@@ -139,5 +144,42 @@
         <a href="${pageContext.request.contextPath}/board/register" class="write-btn">글쓰기</a>
     </div>
 </div>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        loadBoardType();
+    });
+
+    function loadBoardType() {
+        fetch('${pageContext.request.contextPath}/selectComcode?codeType=menu')
+            .then(response => response.json())
+            .then(boardType => {
+                const container = document.querySelector('.board-type');
+                container.innerHTML = '';
+
+                boardType.forEach(menu => {
+                    const input = document.createElement('input');
+                    input.type = 'radio';
+                    input.name = 'boardType';
+                    input.value = menu.codeId;
+                    input.id = `${menu.codeId}`;
+
+                    const label = document.createElement('label');
+                    label.setAttribute('for', `type-${menu.codeId}`);
+                    label.textContent = menu.codeName;
+
+                    container.appendChild(input);
+                    container.appendChild(label);
+                });
+
+                console.log(value);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    }
+
+</script>
 </body>
 </html>
