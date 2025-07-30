@@ -85,10 +85,10 @@
         <tbody>
         <c:forEach var="board" items="${boardList}">
             <tr>
-                <td><c:out value="${board.boardType}"/></td>
+                <td><c:out value="${board.boardTypeName}"/></td>
                 <td><c:out value="${board.boardNum}"/></td>
                 <td>
-                    <a href="${pageContext.request.contextPath}/board/read?boardType=${board.boardType}&boardNum=${board.boardNum}">
+                    <a href="${pageContext.request.contextPath}/board/read?boardType=${board.boardTypeName}&boardNum=${board.boardNum}">
                         <c:out value="${board.boardTitle}"/>
                     </a>
                 </td>
@@ -97,18 +97,18 @@
         </tbody>
     </table>
 
-<%--    <form action="${pageContext.request.contextPath}/board/list" method="get">--%>
-<%--        <div class="board-type">--%>
-<%--            <c:forEach var="menu" items="${menuCode}">--%>
-<%--                <input type="radio" name="type" value="${menu.codeId}"--%>
-<%--                       id="type-${menu.codeId}" <c:if test="${selectedType == menu.codeId}">checked</c:if>>--%>
-<%--                <label for="type-${menu.codeId}">${menu.codeName}</label>--%>
-<%--            </c:forEach>--%>
-<%--        </div>--%>
-<%--        <input type="hidden" name="page" value="${boardList.number}">--%>
-<%--        <input type="hidden" name="size" value="${boardList.size}">--%>
-<%--        <button type="submit">조회</button>--%>
-<%--    </form>--%>
+    <form action="${pageContext.request.contextPath}/board/list" method="get">
+        <div class="board-type">
+            <c:forEach var="menu" items="${menuCode}">
+                <input type="radio" name="type" value="${menu.codeId}"
+                       id="type-${menu.codeId}" <c:if test="${selectedType == menu.codeId}">checked</c:if>>
+                <label for="type-${menu.codeId}">${menu.codeName}</label>
+            </c:forEach>
+        </div>
+        <input type="hidden" name="page" value="${boardList.number}">
+        <input type="hidden" name="size" value="${boardList.size}">
+        <button type="submit">조회</button>
+    </form>
 
 
 

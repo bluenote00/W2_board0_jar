@@ -54,6 +54,7 @@ public class BoardController {
 
         logger.info("+ Start " + className + ".boardDetail");
 
+        paramMap.put("boardTypeName", paramMap.get("boardTypeName"));
         paramMap.put("boardType", paramMap.get("boardType"));
         paramMap.put("boardNum", paramMap.get("boardNum"));
 

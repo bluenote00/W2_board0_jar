@@ -12,11 +12,15 @@
                             WHEN 'a02' THEN '공지'
                             WHEN 'a03' THEN 'QA'
                             WHEN 'a04' THEN '자유'
-                        END           AS boardTypeName
-               ,        BOARD_NUM     AS boardNum
+                            ELSE '기타'
+                        END             AS boardTypeName
+               ,        BOARD_NUM       AS boardNum
                ,        BOARD_TITLE     AS boardTitle
                ,        BOARD_COMMENT   AS boardComment
         FROM            BOARD
+        <if test="codeType !=null and codeType!=''">
+        WHERE           BOARD_TYPE = #{codeType}
+        </if>
         ORDER BY        BOARD_NUM DESC
     </select>
 
@@ -25,13 +29,23 @@
         /* com.example.W2_board0_jar.dao.board.BoardDao */
         SELECT      COUNT(*)
         FROM        BOARD
+        <if test="codeType !=null and codeType!=''">
+        WHERE           BOARD_TYPE = #{codeType}
+        </if>
     </select>
 
 
     <!-- 게시글 상세보기 -->
     <select id="SelectBoardDetail" parameterType="java.util.Map" resultType ="com.example.W2_board0_jar.dto.board.BoardDto">
         /* com.example.W2_board0_jar.dao.board.BoardDao */
-        SELECT 	 	BOARD_TYPE      AS  boardType
+        SELECT         BOARD_TYPE       AS boardType
+                 ,        CASE BOARD_TYPE
+                          WHEN 'a01' THEN '일반'
+                          WHEN 'a02' THEN '공지'
+                          WHEN 'a03' THEN 'QA'
+                          WHEN 'a04' THEN '자유'
+                          ELSE '기타'
+                    END             AS  boardTypeName
              ,		BOARD_NUM       AS  boardNum
              ,		BOARD_TITLE     AS  boardTitle
              ,    	BOARD_COMMENT   AS  boardComment
@@ -51,7 +65,7 @@
              ,    	CREATOR 		AS  creator
         FROM 		BOARD
         WHERE       BOARD_TYPE      =   #{boardType}
-          AND         BOARD_NUM       =   #{boardNum}
+          AND       BOARD_NUM       =   #{boardNum}
     </insert>
 
 

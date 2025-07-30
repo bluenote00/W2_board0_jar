@@ -65,10 +65,11 @@ public class JoinController {
 
         try {
             joinService.Join(paramMap);
-
+            model.addAttribute("message", "가입이 완료되었습니다");
             return "redirect:/";
 
         } catch (Exception e) {
+            model.addAttribute("message", "가입에 실패하였습니다.");
             model.addAttribute(paramMap);
 
             return "join";

@@ -67,21 +67,18 @@
     </style>
     <title>회원가입</title>
 
+
+
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body>
 <div class="container">
     <h2>회원가입</h2>
-
     <div class="form-group">
         <a href="${pageContext.request.contextPath}/">List</a>
     </div>
     <form id="joinForm"
            action="${pageContext.request.contextPath}/member/join" method="post" onsubmit="return validateForm()">
-
-        <c:if test="${not empty errorMessage}">
-            <div class="error-message">${errorMessage}</div>
-        </c:if>
 
         <!-- ID -->
         <div class="form-group">

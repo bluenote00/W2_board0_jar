@@ -4,6 +4,9 @@ public class BoardDto {
 
     // 게시글 유형
     private String boardType;
+
+    // 게시글 유형
+    private String boardTypeName;
     
     // 게시글 번호
     private int boardNum;
@@ -37,6 +40,14 @@ public class BoardDto {
 
     public void setBoardType(String boardType) {
         this.boardType = boardType;
+    }
+
+    public String getBoardTypeName() {
+        return boardTypeName;
+    }
+
+    public void setBoardTypeName(String boardTypeName) {
+        this.boardTypeName = boardTypeName;
     }
 
     public int getBoardNum() {
