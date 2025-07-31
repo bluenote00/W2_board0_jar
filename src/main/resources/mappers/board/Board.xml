@@ -9,7 +9,7 @@
         SELECT         BOARD_TYPE       AS boardType
                ,        CASE BOARD_TYPE
                             WHEN 'a01' THEN '일반'
-                            WHEN 'a02' THEN 'QA'
+                            WHEN 'a02' THEN 'Q&amp;A'
                             WHEN 'a03' THEN '익명'
                             WHEN 'a04' THEN '자유'
                             ELSE '기타'
@@ -18,8 +18,8 @@
                ,        BOARD_TITLE     AS boardTitle
                ,        BOARD_COMMENT   AS boardComment
         FROM            BOARD
-        <if test="codeId !=null and codeId!=''">
-        WHERE           BOARD_TYPE = #{codeId}
+        <if test="boardType !=null and boardType!=''">
+        WHERE           BOARD_TYPE = #{boardType}
         </if>
         ORDER BY        BOARD_NUM DESC
     </select>
@@ -29,8 +29,8 @@
         /* com.example.W2_board0_jar.dao.board.BoardDao */
         SELECT      COUNT(*)
         FROM        BOARD
-        <if test="codeId !=null and codeId!=''">
-        WHERE           BOARD_TYPE = #{codeId}
+        <if test="boardType !=null and boardType!=''">
+        WHERE           BOARD_TYPE = #{boardType}
         </if>
     </select>
 
@@ -41,7 +41,7 @@
         SELECT         BOARD_TYPE       AS boardType
                  ,        CASE BOARD_TYPE
                           WHEN 'a01' THEN '일반'
-                          WHEN 'a02' THEN 'QA'
+                          WHEN 'a02' THEN 'Q&amp;A'
                           WHEN 'a03' THEN '익명'
                           WHEN 'a04' THEN '자유'
                           ELSE '기타'
@@ -80,7 +80,7 @@
     </insert>
 
     <!-- 게시글 수정 -->
-    <update id="updateBoard" parameterType="map">
+    <update id="UpdateBoard" parameterType="map">
         UPDATE 		BOARD
         SET
                     BOARD_TYPE      =   #{boardType}
@@ -90,4 +90,11 @@
           ,  	    MODIFIED_TIME 	=   SYSDATE
         WHERE 		BOARD_NUM       =   #{boardNum}
     </update>
+
+    <!-- 게시글 삭제 -->
+    <delete id="BoardDelete" parameterType="map">
+        DELETE
+        FROM        BOARD
+        WHERE 		BOARD_NUM       =   #{boardNum}
+    </delete>
 </mapper>

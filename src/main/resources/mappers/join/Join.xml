@@ -11,6 +11,13 @@
         WHERE       USER_ID = #{userId}
     </select>
 
+    <!-- 이름 중복 체크 -->
+    <select id="checkDuplicateName" parameterType="map" resultType="int">
+        SELECT      COUNT(*)
+        FROM        USER_INFO
+        WHERE       USER_NAME = #{userName}
+    </select>
+
     <!-- 회원가입 -->
     <insert id="Join" parameterType="map">
         /* com.example.W2_board0_jar.dao.join.JoinDao */
@@ -19,11 +26,11 @@
                         USER_ID
                 ,		USER_PW
                 ,		USER_NAME
-                ,		USER_PHONE1
-                ,		USER_PHONE2
-                ,		USER_PHONE3
+                ,		USER_EMAIL
+                ,		USER_PHONE
                 ,		USER_ADDR1
                 ,		USER_ADDR2
+                ,		USER_ADDR3
                 ,		USER_COMPANY
                 ,		CREATOR
                 ,		CREATE_TIME
@@ -31,11 +38,11 @@
                         #{userId}
                  ,		#{userPw}
                  ,		#{userName}
-                 ,		#{userPhone1}
-                 ,		#{userPhone2}
-                 ,		#{userPhone3}
+                 ,		#{userEmail}
+                 ,		#{userPhone}
                  ,		#{userAddr1}
                  ,		#{userAddr2}
+                 ,		#{userAddr3}
                  ,		#{userCompany}
                  ,		#{userId}
                  ,		SYSDATE

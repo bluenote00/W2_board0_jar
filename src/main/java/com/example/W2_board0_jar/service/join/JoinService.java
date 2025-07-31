@@ -22,6 +22,13 @@ public class JoinService {
     }
 
     /**
+     * 닉네임 중복 체크
+     */
+    public int checkDuplicateName(Map<String, Object> paramMap) throws Exception {
+        return joinDao.checkDuplicateName(paramMap);
+    }
+
+    /**
      * 가입하기
      */
     public int Join(Map<String, Object> paramMap) throws Exception {

@@ -15,6 +15,11 @@ public interface JoinDao {
     int checkDuplicateId(Map<String, Object> paramMap);
 
     /**
+     * 이름 중복 체크
+     */
+    int checkDuplicateName(Map<String, Object> paramMap);
+
+    /**
      * 회원가입
      */
     int Join(Map<String, Object> paramMap);

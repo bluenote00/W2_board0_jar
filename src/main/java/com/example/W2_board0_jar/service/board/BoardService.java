@@ -48,7 +48,14 @@ public class BoardService {
     /**
      * 게시글 수정
      */
-    public void updateBoard(Map<String, Object> paramMap) throws Exception {
-        dao.updateBoard(paramMap);
+    public void UpdateBoard(Map<String, Object> paramMap) throws Exception {
+        dao.UpdateBoard(paramMap);
+    }
+
+    /**
+     * 게시글 삭제
+     */
+    public int BoardDelete(Map<String, Object> paramMap) throws Exception {
+        return dao.BoardDelete(paramMap);
     }
 }

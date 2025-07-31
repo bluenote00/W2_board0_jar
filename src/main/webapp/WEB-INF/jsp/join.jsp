@@ -104,17 +104,29 @@
         <div class="form-group">
             <label for="userName">name</label>
             <input type="text" class="form-control" id="userName" name="userName" value="${userName}">
+            <button type="button" class="btn-check-name" onclick="checkDuplicateName()">중복확인</button>
+        </div>
+
+        <!-- 이메일 -->
+        <div class="form-group">
+            <label for="userEmail">이메일</label>
+            <input type="text" class="form-control" id="userEmail" name="userEmail" value="${userEmail}">
+            <button type="button" class="btn-check-email" onclick="checkSendEmail()">인증 메일 발송</button>
         </div>
 
         <!-- Phone -->
+        <%-- 전화번호 3가지 합치기  --%>
+        <input type="hidden" name="userPhone" id="userPhone">
+
         <div class="form-group">
             <label>phone</label>
             <div class="phone-group">
                 <select class="phone-select" name="userPhone1">
                     <option value="">선택</option>
                 </select>
-                <input type="text" class="phone-input" name="userPhone2" value="${userPhone2}" maxlength="4">
-                <input type="text" class="phone-input" name="userPhone3" value="${userPhone3}" maxlength="4">
+                <input type="text" class="phone-input" name="userPhone2" maxlength="4" oninput="filterToNumbers(this)">
+                <input type="text" class="phone-input" name="userPhone3" maxlength="4" oninput="filterToNumbers(this)">
+
             </div>
         </div>
 
@@ -131,6 +143,12 @@
             <input type="text" class="form-control" id="userAddr2" name="userAddr2" value="${userAddr2}" placeholder="상세주소를 입력해주세요">
         </div>
 
+        <!-- Address 3 -->
+        <div class="form-group">
+            <label for="userAddr3">address_detail</label>
+            <input type="text" class="form-control" id="userAddr3" name="userAddr3" value="${userAddr3}" placeholder="나머지 상세주소를 입력해주세요">
+        </div>
+
         <!-- Company -->
         <div class="form-group">
             <label for="userCompany">company</label>
@@ -143,14 +161,22 @@
 
 <script>
     let idChecked = false;
+    let nameChecked = false;
+    let emailChecked = false;
 
     function validateForm() {
         const userId = document.getElementById('userId').value;
         const userPw = document.getElementById('userPw').value;
         const pwCheck = document.getElementById('pwCheck').value;
         const userName = document.getElementById('userName').value;
+        const userEmail = document.getElementById('userEmail').value;
+        const phone1 = document.querySelector('[name="userPhone1"]').value;
         const phone2 = document.querySelector('[name="userPhone2"]').value;
         const phone3 = document.querySelector('[name="userPhone3"]').value;
+
+        // 전화번호 결합
+        const userPhone = phone1 + phone2 + phone3;
+        document.getElementById('userPhone').value = userPhone;
 
         if (!userId || !userPw || !pwCheck || !userName) {
             alert('필수 정보를 모두 입력해주세요.');
@@ -181,6 +207,11 @@
         return true;
     }
 
+    function filterToNumbers(input) {
+        input.value = input.value.replace(/[^0-9]/g, '');
+    }
+
+
     function checkDuplicateId() {
         const userId = document.getElementById('userId').value;
 
@@ -202,7 +233,52 @@
                     idChecked = false;
                 }
             });
-        console.log("실제 요청 URL:", `${pageContext.request.contextPath}/member/check-id?userId=${userId}`);
+    }
+
+    function checkDuplicateName() {
+        const userName = document.getElementById('userName').value;
+
+        if (!userName) {
+            alert('닉네임을 입력해주세요.');
+            return;
+        }
+
+        console.log(userName);
+
+        fetch(`${pageContext.request.contextPath}/member/check-name?userName=${userName}`)
+            .then(response => response.json())
+            .then(duplicateCount2 => {
+                if (duplicateCount2 < 1) {
+                    alert('사용 가능한 이름입니다.');
+                    nameChecked = true;
+                } else {
+                    alert('이미 사용중인 이름입니다.');
+                    nameChecked = false;
+                }
+            });
+    }
+
+    function checkSendEmail() {
+        const creator = document.getElementById('creator').value;
+
+        if (!creator) {
+            alert('닉네임을 입력해주세요.');
+            return;
+        }
+
+        console.log(creator);
+
+        fetch(`${pageContext.request.contextPath}/member/check-creator?creator=${creator}`)
+            .then(response => response.json())
+            .then(duplicateCount2 => {
+                if (duplicateCount2 < 1) {
+                    alert('사용 가능한 닉네임입니다.');
+                    emailChecked = true;
+                } else {
+                    alert('이미 사용중인 닉네임입니다.');
+                    emailChecked = false;
+                }
+            });
     }
 
     function checkPasswordMatch() {

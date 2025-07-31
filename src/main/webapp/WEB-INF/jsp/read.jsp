@@ -32,8 +32,9 @@
         <div class="btn-group">
             <a href="${pageContext.request.contextPath}/" class="btn">List</a>
 
-            <c:if test="${not empty sessionScope.userId}">
-                <a href="${pageContext.request.contextPath}/board/update/${boardDto.boardType}/${boardDto.boardNum}" class="btn">Update</a>
+            <c:if test="${not empty sessionScope.userId && sessionScope.creator == boardDto.creator}">
+                <a href="${pageContext.request.contextPath}/board/update/${boardDto.boardType}/${boardDto.boardNum}" class="btn">수정</a>
+                <a href="${pageContext.request.contextPath}/board/delete?boardNum=${boardDto.boardNum}" class="btn">삭제</a>
             </c:if>
         </div>
     </c:forEach>

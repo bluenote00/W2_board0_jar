@@ -31,5 +31,10 @@ public interface BoardDao {
     /**
      * 게시글 수정
      */
-    void updateBoard(Map<String, Object> paramMap) throws Exception;
+    void UpdateBoard(Map<String, Object> paramMap) throws Exception;
+
+    /**
+     * 게시글 작성
+     */
+    int BoardDelete(Map<String, Object> paramMap);
 }

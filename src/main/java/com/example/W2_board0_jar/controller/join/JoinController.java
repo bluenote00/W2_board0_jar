@@ -54,6 +54,24 @@ public class JoinController {
     }
 
     /**
+     * 닉네임 중복 체크
+     */
+    @GetMapping("/member/check-name")
+    @ResponseBody
+    public int checkDuplicateName(@RequestParam("userName") String userName) throws Exception {
+
+        logger.info("+ checkDuplicateName " + userName);
+
+        Map<String, Object> checkMap = new HashMap<>();
+        checkMap.put("userName", userName);
+
+        int duplicateCount2 = joinService.checkDuplicateName(checkMap);
+
+        logger.info("+ checkDuplicateName " + duplicateCount2);
+        return duplicateCount2;
+    }
+
+    /**
      * 가입하기
      */
     @PostMapping("/member/join")

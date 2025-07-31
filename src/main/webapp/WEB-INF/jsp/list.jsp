@@ -99,16 +99,20 @@
 
     <form action="${pageContext.request.contextPath}/" method="get">
             <div class="board-type">
+                <input type="radio" name="boardType" value="" id="type-all"
+                       <c:if test="${empty selectedType}">checked</c:if>>
+                <label for="type-${menu.codeId}">전체</label>
+
                 <c:forEach var="menu" items="${menuCode}">
                     <input type="radio" name="boardType" value="${menu.codeId}"
                            id="type-${menu.codeId}"
                     <c:if test="${selectedType == menu.codeId}">checked</c:if>>
-                    <label for="type-${menu.codeId}"></label>${menu.codeName}
+                    <label for="type-${menu.codeId}">${menu.codeName}</label>
                 </c:forEach>
             </div>
-    <%--        <input type="hidden" name="page" value="${boardList.number}">--%>
-    <%--        <input type="hidden" name="size" value="${boardList.size}">--%>
-            <button type="submit">조회</button>
+<%--            <input type="hidden" name="page" value="${boardList.number}">--%>
+<%--            <input type="hidden" name="size" value="${boardList.size}">--%>
+            <button type="submit" value="${menu.codeId}">조회</button>
     </form>
 
 
@@ -116,13 +120,13 @@
 <%--        <ul>--%>
 <%--            <li class="${boardList.first ? 'disabled' : ''}">--%>
 <%--                <c:if test="${!boardList.first}">--%>
-<%--                    <a href="${pageContext.request.contextPath}/board/list?page=${boardList.number -1}&size=${boardList.size}&type=${param.type}">이전</a>--%>
+<%--                    <a href="${pageContext.request.contextPath}/?page=${boardList.number -1}&size=${boardList.size}&type=${menu.codeId}">이전</a>--%>
 <%--                </c:if>--%>
 <%--            </li>--%>
 
-<%--            <c:forEach var="pageNum" begin="0" end="${boardList.totalPages - 1}">--%>
+<%--            <c:forEach var="pageNum" begin="0" end="${boardList.totalPages - 1}" items="${boardList}">--%>
 <%--                <li class="${pageNum == boardList.number ? 'active' : ''}">--%>
-<%--                    <a href="${pageContext.request.contextPath}/board/list?page=${pageNum}&size=${boardList.size}&type=${param.type}">--%>
+<%--                    <a href="${pageContext.request.contextPath}/?page=${pageNum}&size=${boardList.size}&type=${menu.codeId}">--%>
 <%--                        ${pageNum + 1}--%>
 <%--                    </a>--%>
 <%--                </li>--%>
@@ -130,14 +134,16 @@
 
 <%--            <li class="${boardList.last ? 'disabled' : ''}">--%>
 <%--                <c:if test="${!boardList.last}">--%>
-<%--                    <a href="${pageContext.request.contextPath}/board/list?page=${boardList.number + 1}&size=${boardList.size}&type=${param.type}">다음</a>--%>
+<%--                    <a href="${pageContext.request.contextPath}/?page=${boardList.number + 1}&size=${boardList.size}&type=${menu.codeId}">다음</a>--%>
 <%--                </c:if>--%>
 <%--            </li>--%>
 <%--        </ul>--%>
 <%--    </div>--%>
 
     <div class="button-group">
-        <a href="${pageContext.request.contextPath}/board/register" class="write-btn">글쓰기</a>
+        <c:if test="${not empty sessionScope.userId}">
+            <a href="${pageContext.request.contextPath}/board/register" class="write-btn">글쓰기</a>
+        </c:if>
     </div>
 </div>
 
@@ -152,7 +158,6 @@
             .then(response => response.json())
             .then(boardType => {
                 const container = document.querySelector('.board-type');
-                container.innerHTML = '';
 
                 boardType.forEach(menu => {
                     const input = document.createElement('input');
@@ -167,8 +172,6 @@
 
                     container.appendChild(input);
                     container.appendChild(label);
-
-                    console.log(input.value);
                 });
             })
             .catch(error => {

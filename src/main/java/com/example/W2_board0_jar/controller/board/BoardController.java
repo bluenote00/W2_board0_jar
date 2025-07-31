@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -37,12 +36,20 @@ public class BoardController {
 
         logger.info("+ Start " + className + ".boardList");
 
-        List<BoardDto> boardList = boardService.SelectBoardList(paramMap);
-        int totalElements = boardService.SelectBoardCount(paramMap);
+//        int currentPage = Integer.parseInt((String) paramMap.get("pageNum"));
+//        int pageSize = Integer.parseInt((String) paramMap.get("size"));
+//        int pageIndex = (currentPage - 1) * pageSize;
+//
+//        paramMap.put("pageIndex", pageIndex);
+//        paramMap.put("pageSize", pageSize);
 
+        // 세션에서 사용자 정보 담기
         paramMap.put("userId", session.getAttribute("userId"));
         paramMap.put("creator", session.getAttribute("creator"));
         paramMap.put("userName", session.getAttribute("userName"));
+
+        List<BoardDto> boardList = boardService.SelectBoardList(paramMap);
+        int totalElements = boardService.SelectBoardCount(paramMap);
 
         model.addAttribute("boardList", boardList);
         model.addAttribute("totalElements", totalElements);
@@ -142,7 +149,7 @@ public class BoardController {
 
         return "update";
     }
-
+    
     /**
      * 게시글 수정
      */
@@ -157,13 +164,32 @@ public class BoardController {
         logger.info("   - paramMap : " + paramMap);
 
         try {
-            boardService.updateBoard(paramMap);
+            boardService.UpdateBoard(paramMap);
 
         } catch (Exception e) {
             throw e;
         }
 
         logger.info("   - paramMap : " + paramMap);
+
+        return "redirect:/";
+    }
+
+    /**
+     * 게시글 삭제
+     */
+    @RequestMapping("/board/delete")
+    public String BoardDelete(@RequestParam Map<String, Object> paramMap) throws Exception {
+
+        logger.info("+ Start " + className + ".BoardDelete");
+        logger.info("   - paramMap : " + paramMap);
+
+        try {
+            boardService.BoardDelete(paramMap);
+
+        } catch (Exception e) {
+            throw e;
+        }
 
         return "redirect:/";
 

@@ -37,7 +37,7 @@
             </div>
 
             <div class="btn-group">
-                <a href="${pageContext.request.contextPath}/board/list" class="btn">List</a>
+                <a href="${pageContext.request.contextPath}/" class="btn">List</a>
                 <button type="submit">Update</button>
             </div>
         </form>
