@@ -104,15 +104,15 @@
         <div class="form-group">
             <label for="userName">name</label>
             <input type="text" class="form-control" id="userName" name="userName" value="${userName}">
-            <button type="button" class="btn-check-name" onclick="checkDuplicateName()">중복확인</button>
+<%--            <button type="button" class="btn-check-name" onclick="checkDuplicateName()">중복확인</button>--%>
         </div>
 
         <!-- 이메일 -->
-        <div class="form-group">
-            <label for="userEmail">이메일</label>
-            <input type="text" class="form-control" id="userEmail" name="userEmail" value="${userEmail}">
-            <button type="button" class="btn-check-email" onclick="checkSendEmail()">인증 메일 발송</button>
-        </div>
+<%--        <div class="form-group">--%>
+<%--            <label for="userEmail">이메일</label>--%>
+<%--            <input type="text" class="form-control" id="userEmail" name="userEmail" value="${userEmail}">--%>
+<%--            <button type="button" class="btn-check-email" onclick="checkSendEmail()">인증 메일 발송</button>--%>
+<%--        </div>--%>
 
         <!-- Phone -->
         <%-- 전화번호 3가지 합치기  --%>
@@ -198,6 +198,11 @@
             return false;
         }
 
+        // if (!emailChecked) {
+        //     alert('이메일 인증을 해주세요.');
+        //     return false;
+        // }
+
         if (phone2 && phone3) {
             if (!/^\d{3,4}$/.test(phone2) || !/^\d{4}$/.test(phone3)) {
                 alert('전화번호 형식이 올바르지 않습니다.');
@@ -220,8 +225,6 @@
             return;
         }
 
-        console.log(userId);
-
         fetch(`${pageContext.request.contextPath}/member/check-id?userId=${userId}`)
             .then(response => response.json())
             .then(duplicateCount => {
@@ -235,51 +238,49 @@
             });
     }
 
-    function checkDuplicateName() {
-        const userName = document.getElementById('userName').value;
+    <%--function checkDuplicateName() {--%>
+    <%--    const userName = document.getElementById('userName').value;--%>
 
-        if (!userName) {
-            alert('닉네임을 입력해주세요.');
-            return;
-        }
+    <%--    if (!userName) {--%>
+    <%--        alert('이름을 입력해주세요.');--%>
+    <%--        return;--%>
+    <%--    }--%>
 
-        console.log(userName);
+    <%--    fetch(`${pageContext.request.contextPath}/member/check-name?userName=${userName}`)--%>
+    <%--        .then(response => response.json())--%>
+    <%--        .then(duplicateCount2 => {--%>
+    <%--            if (duplicateCount2 < 1) {--%>
+    <%--                alert('사용 가능한 이름입니다.');--%>
+    <%--                nameChecked = true;--%>
+    <%--            } else {--%>
+    <%--                alert('이미 사용중인 이름입니다.');--%>
+    <%--                nameChecked = false;--%>
+    <%--            }--%>
+    <%--        });--%>
+    <%--}--%>
 
-        fetch(`${pageContext.request.contextPath}/member/check-name?userName=${userName}`)
-            .then(response => response.json())
-            .then(duplicateCount2 => {
-                if (duplicateCount2 < 1) {
-                    alert('사용 가능한 이름입니다.');
-                    nameChecked = true;
-                } else {
-                    alert('이미 사용중인 이름입니다.');
-                    nameChecked = false;
-                }
-            });
-    }
+    <%--function checkSendEmail() {--%>
+    <%--    const userEmail = document.getElementById('').userEmail;--%>
 
-    function checkSendEmail() {
-        const creator = document.getElementById('creator').value;
+    <%--    if (!userEmail) {--%>
+    <%--        alert('이메일 주소를 입력해주세요.');--%>
+    <%--        return;--%>
+    <%--    }--%>
 
-        if (!creator) {
-            alert('닉네임을 입력해주세요.');
-            return;
-        }
+    <%--    console.log(creator);--%>
 
-        console.log(creator);
-
-        fetch(`${pageContext.request.contextPath}/member/check-creator?creator=${creator}`)
-            .then(response => response.json())
-            .then(duplicateCount2 => {
-                if (duplicateCount2 < 1) {
-                    alert('사용 가능한 닉네임입니다.');
-                    emailChecked = true;
-                } else {
-                    alert('이미 사용중인 닉네임입니다.');
-                    emailChecked = false;
-                }
-            });
-    }
+    <%--    fetch(`${pageContext.request.contextPath}/member/check-creator?creator=${creator}`)--%>
+    <%--        .then(response => response.json())--%>
+    <%--        .then(duplicateCount2 => {--%>
+    <%--            if (duplicateCount2 < 1) {--%>
+    <%--                alert('사용 가능한 닉네임입니다.');--%>
+    <%--                emailChecked = true;--%>
+    <%--            } else {--%>
+    <%--                alert('이미 사용중인 닉네임입니다.');--%>
+    <%--                emailChecked = false;--%>
+    <%--            }--%>
+    <%--        });--%>
+    <%--}--%>
 
     function checkPasswordMatch() {
         const password = document.getElementById('userPw').value;
