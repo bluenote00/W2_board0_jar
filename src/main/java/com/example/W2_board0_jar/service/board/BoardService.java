@@ -48,8 +48,8 @@ public class BoardService {
     /**
      * 게시글 수정
      */
-    public void UpdateBoard(Map<String, Object> paramMap) throws Exception {
-        dao.UpdateBoard(paramMap);
+    public int UpdateBoard(Map<String, Object> paramMap) throws Exception {
+        return dao.UpdateBoard(paramMap);
     }
 
     /**
