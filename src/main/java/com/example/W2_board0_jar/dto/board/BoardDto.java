@@ -29,6 +29,9 @@ public class BoardDto {
     // 수정시간
     private String modifiedTime;
 
+    // 파일명
+    private String fileName;
+    
     // 파일경로
     private String fileRoot;
 
@@ -104,6 +107,14 @@ public class BoardDto {
 
     public void setModifiedTime(String modifiedTime) {
         this.modifiedTime = modifiedTime;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileRoot) {
+        this.fileName = fileName;
     }
 
     public String getFileRoot() {

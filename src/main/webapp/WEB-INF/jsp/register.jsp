@@ -39,6 +39,11 @@
         </div>
 
         <div class="form-group">
+            <label>파일 업로드</label>
+            <input type="file" name="uploadFile" value="${boardDto.boardFile}">
+        </div>
+
+        <div class="form-group">
             <label>Writer</label>
             <input type="text" value="${sessionScope.creator}" readonly>
         </div>

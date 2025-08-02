@@ -49,6 +49,7 @@
              ,		BOARD_NUM       AS  boardNum
              ,		BOARD_TITLE     AS  boardTitle
              ,    	BOARD_COMMENT   AS  boardComment
+             ,    	FILE_NAME       AS  fileName
              ,    	CREATOR 		AS  creator
         FROM 		BOARD
         WHERE       BOARD_TYPE      =   #{boardType}
@@ -67,6 +68,8 @@
                 ,       BOARD_TYPE
                 ,		BOARD_TITLE
                 ,		BOARD_COMMENT
+                ,		FILE_NAME
+                ,		FILE_ROOT
                 ,		CREATOR
                 ,       CREATE_TIME
         ) VALUES (
@@ -74,6 +77,8 @@
                  ,      #{boardType}
                  ,		#{boardTitle}
                  ,		#{boardComment}
+                 ,		#{fileName}
+                 ,		#{fileRoot}
                  ,		#{userId}
                  ,		SYSDATE
                  )
