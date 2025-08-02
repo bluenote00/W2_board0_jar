@@ -74,9 +74,6 @@
 <body>
 <div class="container">
     <h2>회원가입</h2>
-    <div class="form-group">
-        <a href="${pageContext.request.contextPath}/">List</a>
-    </div>
     <form id="joinForm"
            action="${pageContext.request.contextPath}/member/join" method="post" onsubmit="return validateForm()">
 

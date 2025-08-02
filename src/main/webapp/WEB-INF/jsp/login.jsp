@@ -108,6 +108,7 @@
 
             <div class="links">
                 <button type="submit">Login</button>
+                <a href="${pageContext.request.contextPath}/member/moveJoin">Join</a>
             </div>
         </form>
     </div>

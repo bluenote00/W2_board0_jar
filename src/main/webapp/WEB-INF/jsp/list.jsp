@@ -65,10 +65,6 @@
 <body>
 <div class="container">
     <div class="header">
-        <c:if test="${empty sessionScope.userId}">
-            <a href="${pageContext.request.contextPath}/member/moveLogin">Login</a>
-            <a href="${pageContext.request.contextPath}/member/moveJoin">Join</a>
-        </c:if>
         <c:if test="${not empty sessionScope.userId}">
             <a href="${pageContext.request.contextPath}/member/logout">Logout</a>
         </c:if>

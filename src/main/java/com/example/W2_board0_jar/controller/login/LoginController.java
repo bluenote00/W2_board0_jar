@@ -42,12 +42,17 @@ public class LoginController {
     @PostMapping("/member/login")
     public String login(@ModelAttribute JoinDto joinDto, Model model, HttpSession session) throws Exception {
 
-        Map<String, Object> result = loginService.login(joinDto);
+            Map<String, Object> result = loginService.login(joinDto);
+
+            logger.info("+ Start LoginController.login2" + result);
 
         if ("success".equals(result.get("status"))) {
             session.setAttribute("userId", result.get("userId"));
             session.setAttribute("userName", result.get("userName"));
             session.setAttribute("creator", result.get("creator"));
+
+            logger.info("+ 로그인 성공" + result);
+
             return "redirect:/";
 
         } else {
@@ -64,6 +69,6 @@ public class LoginController {
 
         session.invalidate();
 
-        return "redirect:/";
+        return "login";
     }
 }
