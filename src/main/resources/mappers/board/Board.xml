@@ -4,25 +4,32 @@
 
 <mapper namespace="com.example.W2_board0_jar.dao.board.BoardDao">
     <!-- 게시판 전체 조회-->
-    <select id="SelectBoardList" parameterType="java.util.Map" resultType ="com.example.W2_board0_jar.dto.board.BoardDto">
-        /* com.example.W2_board0_jar.dao.board.BoardDao */
-        SELECT         BOARD_TYPE       AS boardType
-               ,        CASE BOARD_TYPE
-                            WHEN 'a01' THEN '일반'
-                            WHEN 'a02' THEN 'Q&amp;A'
-                            WHEN 'a03' THEN '익명'
-                            WHEN 'a04' THEN '자유'
-                            ELSE '기타'
-                        END             AS boardTypeName
-               ,        BOARD_NUM       AS boardNum
-               ,        BOARD_TITLE     AS boardTitle
-               ,        BOARD_COMMENT   AS boardComment
-        FROM            BOARD
-        <if test="boardType !=null and boardType!=''">
-        WHERE           BOARD_TYPE = #{boardType}
+    <select id="SelectBoardList" parameterType="java.util.Map" resultType="com.example.W2_board0_jar.dto.board.BoardDto">
+        SELECT * FROM (
+                SELECT inner_table.*, ROWNUM AS rn FROM (
+                SELECT
+                BOARD_TYPE AS boardType,
+                CASE BOARD_TYPE
+                WHEN 'a01' THEN '일반'
+                WHEN 'a02' THEN 'Q&amp;A'
+                WHEN 'a03' THEN '익명'
+                WHEN 'a04' THEN '자유'
+                ELSE '기타'
+                END AS boardTypeName,
+                BOARD_NUM AS boardNum,
+                BOARD_TITLE AS boardTitle,
+                BOARD_COMMENT AS boardComment
+        FROM BOARD
+        <if test="boardType != null and boardType != ''">
+            WHERE BOARD_TYPE = #{boardType}
         </if>
-        ORDER BY        BOARD_NUM DESC
+        ORDER BY BOARD_NUM DESC
+            ) inner_table
+            WHERE ROWNUM &lt;= #{pageIndex} + #{pageSize}
+            )
+        WHERE rn &gt; #{pageIndex}
     </select>
+
 
     <!-- 게시글 갯수 카운트-->
     <select id="SelectBoardCount" parameterType="java.util.Map">

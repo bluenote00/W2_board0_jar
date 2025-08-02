@@ -36,14 +36,14 @@ public class BoardController {
 
         logger.info("+ Start " + className + ".boardList");
 
-//        int currentPage = Integer.parseInt((String) paramMap.get("pageNum"));
-//        int pageSize = Integer.parseInt((String) paramMap.get("size"));
-//        int pageIndex = (currentPage - 1) * pageSize;
-//
-//        paramMap.put("pageIndex", pageIndex);
-//        paramMap.put("pageSize", pageSize);
 
-        // 세션에서 사용자 정보 담기
+        int currentPage = paramMap.get("pageNum") != null ? Integer.parseInt((String) paramMap.get("pageNum")) : 1;
+        int pageSize = paramMap.get("size") != null ? Integer.parseInt((String) paramMap.get("size")) : 10;
+        int pageIndex = (currentPage - 1) * pageSize;
+
+        paramMap.put("pageIndex", pageIndex);
+        paramMap.put("pageSize", pageSize);
+
         paramMap.put("userId", session.getAttribute("userId"));
         paramMap.put("creator", session.getAttribute("creator"));
         paramMap.put("userName", session.getAttribute("userName"));
@@ -51,16 +51,17 @@ public class BoardController {
         List<BoardDto> boardList = boardService.SelectBoardList(paramMap);
         int totalElements = boardService.SelectBoardCount(paramMap);
 
-        model.addAttribute("boardList", boardList);
-        model.addAttribute("totalElements", totalElements);
-        model.addAttribute("userId", session.getAttribute("userId"));
-        model.addAttribute("creator", session.getAttribute("creator"));
-        model.addAttribute("userName", session.getAttribute("userName"));
+        int totalPages = (int) Math.ceil((double) totalElements / pageSize);
 
-        logger.info("   - paramMap : " + paramMap);
+        model.addAttribute("boardList", boardList);
+        model.addAttribute("currentPage", currentPage);
+        model.addAttribute("pageSize", pageSize);
+        model.addAttribute("totalPages", totalPages);
+        model.addAttribute("totalElements", totalElements);
 
         return "list";
     }
+
 
     /**
      * 게시글 상세보기

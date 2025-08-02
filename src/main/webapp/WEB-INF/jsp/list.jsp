@@ -106,35 +106,34 @@
                     <label for="type-${menu.codeId}">${menu.codeName}</label>
                 </c:forEach>
             </div>
-<%--            <input type="hidden" name="page" value="${boardList.number}">--%>
-<%--            <input type="hidden" name="size" value="${boardList.size}">--%>
+            <input type="hidden" name="pageNum" value="${currentPage}">
+            <input type="hidden" name="size" value="${pageSize}">
             <button type="submit" value="${menu.codeId}">조회</button>
     </form>
 
 
-<%--    <div class="pagination">--%>
-<%--        <ul>--%>
-<%--            <li class="${boardList.first ? 'disabled' : ''}">--%>
-<%--                <c:if test="${!boardList.first}">--%>
-<%--                    <a href="${pageContext.request.contextPath}/?page=${boardList.number -1}&size=${boardList.size}&type=${menu.codeId}">이전</a>--%>
-<%--                </c:if>--%>
-<%--            </li>--%>
+    <div class="pagination">
+        <ul>
+            <li class="${currentPage == 1 ? 'disabled' : ''}">
+                <c:if test="${currentPage > 1}">
+                    <a href="?pageNum=${currentPage - 1}&size=${pageSize}&boardType=${selectedType}">이전</a>
+                </c:if>
+            </li>
 
-<%--            <c:forEach var="pageNum" begin="0" end="${boardList.totalPages - 1}" items="${boardList}">--%>
-<%--                <li class="${pageNum == boardList.number ? 'active' : ''}">--%>
-<%--                    <a href="${pageContext.request.contextPath}/?page=${pageNum}&size=${boardList.size}&type=${menu.codeId}">--%>
-<%--                        ${pageNum + 1}--%>
-<%--                    </a>--%>
-<%--                </li>--%>
-<%--            </c:forEach>--%>
+            <c:forEach var="i" begin="1" end="${totalPages}">
+                <li class="${i == currentPage ? 'active' : ''}">
+                    <a href="?pageNum=${i}&size=${pageSize}&boardType=${selectedType}">${i}</a>
+                </li>
+            </c:forEach>
 
-<%--            <li class="${boardList.last ? 'disabled' : ''}">--%>
-<%--                <c:if test="${!boardList.last}">--%>
-<%--                    <a href="${pageContext.request.contextPath}/?page=${boardList.number + 1}&size=${boardList.size}&type=${menu.codeId}">다음</a>--%>
-<%--                </c:if>--%>
-<%--            </li>--%>
-<%--        </ul>--%>
-<%--    </div>--%>
+            <li class="${currentPage == totalPages ? 'disabled' : ''}">
+                <c:if test="${currentPage < totalPages}">
+                    <a href="?pageNum=${currentPage + 1}&size=${pageSize}&boardType=${selectedType}">다음</a>
+                </c:if>
+            </li>
+        </ul>
+    </div>
+
 
     <div class="button-group">
         <c:if test="${not empty sessionScope.userId}">
