@@ -225,7 +225,7 @@
             return;
         }
 
-        fetch(`${pageContext.request.contextPath}/member/check-id?userId=${userId}`)
+        fetch('${pageContext.request.contextPath}/member/check-id?userId=' + userId)
             .then(response => response.json())
             .then(duplicateCount => {
                 if (duplicateCount < 1) {
@@ -246,7 +246,7 @@
             return;
         }
 
-        fetch(`${pageContext.request.contextPath}/member/check-name?userName=${userName}`)
+        fetch('${pageContext.request.contextPath}/member/check-name?userName=' + userName)
             .then(response => response.json())
             .then(duplicateCount2 => {
                 if (duplicateCount2 < 1) {
