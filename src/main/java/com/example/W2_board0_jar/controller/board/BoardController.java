@@ -34,8 +34,7 @@ public class BoardController {
     @RequestMapping("/")
     public String SelectBoardList(Model model, @RequestParam Map<String, Object> paramMap, HttpSession session) throws Exception {
 
-        logger.info("+ Start " + className + ".boardList");
-
+        logger.info("+ Start " + className + ".paramMap");
 
         int currentPage = paramMap.get("pageNum") != null ? Integer.parseInt((String) paramMap.get("pageNum")) : 1;
         int pageSize = paramMap.get("size") != null ? Integer.parseInt((String) paramMap.get("size")) : 10;
@@ -49,9 +48,12 @@ public class BoardController {
         paramMap.put("userName", session.getAttribute("userName"));
 
         List<BoardDto> boardList = boardService.SelectBoardList(paramMap);
-        int totalElements = boardService.SelectBoardCount(paramMap);
 
+        int totalElements = boardService.SelectBoardCount(paramMap);
         int totalPages = (int) Math.ceil((double) totalElements / pageSize);
+
+        logger.info("+ Start " + className + paramMap);
+        logger.info("+ End " + this.getClass());
 
         model.addAttribute("boardList", boardList);
         model.addAttribute("currentPage", currentPage);
