@@ -84,7 +84,7 @@
                 <td><c:out value="${board.boardTypeName}"/></td>
                 <td><c:out value="${board.boardNum}"/></td>
                 <td>
-                    <a href="${pageContext.request.contextPath}/board/read?boardType=${board.boardType}&boardNum=${board.boardNum}">
+                    <a href="${pageContext.request.contextPath}/board/read?&boardNum=${board.boardNum}">
                         <c:out value="${board.boardTitle}"/>
                     </a>
                 </td>

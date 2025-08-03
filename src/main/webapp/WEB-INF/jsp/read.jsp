@@ -59,7 +59,7 @@
                     <tr style="border-top: 1px solid #dbdbdb;">
                         <td>다음</td>
                         <td>
-                            <a href="${pageContext.request.contextPath}/board/read?boardType=${boardDto.boardType}&boardNum=${listLevel.NEXT_NUM}">${listLevel.NEXT_TITLE}</a>
+                            <a href="${pageContext.request.contextPath}/board/read?boardNum=${listLevel.NEXT_NUM}">${listLevel.NEXT_TITLE}</a>
                             <c:if test="${empty listLevel.NEXT_TITLE}">
                                 다음글이 없습니다.
                             </c:if>
@@ -69,7 +69,7 @@
                     <tr>
                         <td>이전</td>
                         <td>
-                            <a href="${pageContext.request.contextPath}/board/read?boardType=${boardDto.boardType}&boardNum=${listLevel.PREV_NUM}">${listLevel.PREV_TITLE}</a>
+                            <a href="${pageContext.request.contextPath}/board/read?boardNum=${listLevel.PREV_NUM}">${listLevel.PREV_TITLE}</a>
                             <c:if test="${empty listLevel.PREV_TITLE}">
                                이전글이 없습니다.
                             </c:if>
@@ -89,28 +89,24 @@
         </div>
     </c:forEach>
 </div>
-
 <script>
-    let backCount = 0; // 뒤로가기 횟수
+    // 상세 페이지 히스토리 push
+    history.pushState({ page: "read-detail" }, "", window.location.href);
 
-    window.addEventListener('popstate', function(event) {
-        if (backCount < 1) {
-            backCount++;
-        } else {
-            event.preventDefault();
-            goBack("${pageContext.request.contextPath}/")
+    // 뒤로가기 감지 플래그 (세션별 유지)
+    let backCount = sessionStorage.getItem("backCount") || "0";
+    backCount = parseInt(backCount);
+
+    window.addEventListener("popstate", function (event) {
+        backCount++;
+        sessionStorage.setItem("backCount", backCount);
+
+        if (backCount > 1) {
+            // 두 번 이상 뒤로가기 → 목록으로 리다이렉트
+            location.href = "${pageContext.request.contextPath}/";
         }
     });
-
-    // 뒤로가기 버튼 클릭 시
-    function goBack() {
-        if (backCount < 1) {
-            window.history.back();
-        } else {
-            goBack("${pageContext.request.contextPath}/")
-        }
-    }
-
 </script>
+
 </body>
 </html>

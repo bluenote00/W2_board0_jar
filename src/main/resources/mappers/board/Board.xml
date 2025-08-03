@@ -30,7 +30,6 @@
         WHERE rn &gt; #{pageIndex}
     </select>
 
-
     <!-- 게시글 갯수 카운트-->
     <select id="SelectBoardCount" parameterType="java.util.Map">
         /* com.example.W2_board0_jar.dao.board.BoardDao */
@@ -59,12 +58,10 @@
              ,    	FILE_NAME       AS  fileName
              ,    	CREATOR 		AS  creator
         FROM 		BOARD
-        WHERE       BOARD_TYPE      =   #{boardType}
-        AND         BOARD_NUM       =   #{boardNum}
+        WHERE       BOARD_NUM       =   #{boardNum}
     </select>
 
     <select id="selectBoardNextList" parameterType="java.util.Map" resultType="java.util.Map">
-        <![CDATA[
                 SELECT *
                 FROM (
                          SELECT     BOARD_NUM,
@@ -74,10 +71,8 @@
                                     LEAD(BOARD_TITLE) OVER (ORDER BY BOARD_NUM) AS NEXT_TITLE,
                                     LAG(BOARD_TITLE) OVER (ORDER BY BOARD_NUM) AS PREV_TITLE
                          FROM       BOARD
-                         WHERE      BOARD_TYPE = #{boardType}
                      ) TEMP
                 WHERE               BOARD_NUM = #{boardNum}
-            ]]>
     </select>
 
     <!-- 게시글 작성 -->
