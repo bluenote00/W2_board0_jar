@@ -45,7 +45,7 @@
     <!-- 게시글 상세보기 -->
     <select id="SelectBoardDetail" parameterType="java.util.Map" resultType ="com.example.W2_board0_jar.dto.board.BoardDto">
         /* com.example.W2_board0_jar.dao.board.BoardDao */
-        SELECT         BOARD_TYPE       AS boardType
+        SELECT            BOARD_TYPE       AS boardType
                  ,        CASE BOARD_TYPE
                           WHEN 'a01' THEN '일반'
                           WHEN 'a02' THEN 'Q&amp;A'
@@ -61,6 +61,23 @@
         FROM 		BOARD
         WHERE       BOARD_TYPE      =   #{boardType}
         AND         BOARD_NUM       =   #{boardNum}
+    </select>
+
+    <select id="selectBoardNextList" parameterType="java.util.Map" resultType="java.util.Map">
+        <![CDATA[
+                SELECT *
+                FROM (
+                         SELECT     BOARD_NUM,
+                                    LEAD(BOARD_NUM) OVER (ORDER BY BOARD_NUM) AS NEXT_NUM,
+                                    LAG(BOARD_NUM) OVER (ORDER BY BOARD_NUM) AS PREV_NUM,
+                                        BOARD_TITLE,
+                                    LEAD(BOARD_TITLE) OVER (ORDER BY BOARD_NUM) AS NEXT_TITLE,
+                                    LAG(BOARD_TITLE) OVER (ORDER BY BOARD_NUM) AS PREV_TITLE
+                         FROM       BOARD
+                         WHERE      BOARD_TYPE = #{boardType}
+                     ) TEMP
+                WHERE               BOARD_NUM = #{boardNum}
+            ]]>
     </select>
 
     <!-- 게시글 작성 -->

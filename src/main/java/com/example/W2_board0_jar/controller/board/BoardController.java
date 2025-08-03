@@ -77,6 +77,10 @@ public class BoardController {
 
         List<BoardDto> boardDetail = boardService.SelectBoardDetail(paramMap);
 
+        // 이전글+다음글
+        List<Map<String,Object>> sequenceList = boardService.selectBoardNextList(paramMap);
+        model.addAttribute("sequenceList", sequenceList);
+
         model.addAttribute("boardDetail", boardDetail);
         model.addAttribute("userId", session.getAttribute("userId"));
         model.addAttribute("creator", session.getAttribute("creator"));

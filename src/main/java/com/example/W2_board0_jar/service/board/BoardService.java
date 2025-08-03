@@ -5,8 +5,6 @@ import com.example.W2_board0_jar.dto.board.BoardDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
 
 import java.util.List;
 import java.util.Map;
@@ -36,6 +34,13 @@ public class BoardService {
      */
     public List<BoardDto> SelectBoardDetail(Map<String, Object> paramMap) throws Exception {
         return dao.SelectBoardDetail(paramMap);
+    }
+
+    /**
+     * 이전글+다음글
+     */
+    public List<Map<String, Object>> selectBoardNextList(Map<String, Object> map) throws Exception {
+        return dao.selectBoardNextList(map);
     }
 
     /**

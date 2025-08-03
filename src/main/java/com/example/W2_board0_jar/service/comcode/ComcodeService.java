@@ -1,11 +1,8 @@
 package com.example.W2_board0_jar.service.comcode;
 
 import com.example.W2_board0_jar.dao.comcode.ComcodeDao;
-import com.example.W2_board0_jar.dao.join.JoinDao;
 import com.example.W2_board0_jar.dto.comcode.ComcodeDto;
-import com.example.W2_board0_jar.dto.join.JoinDto;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
