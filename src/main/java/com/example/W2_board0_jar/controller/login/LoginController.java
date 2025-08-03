@@ -2,6 +2,7 @@ package com.example.W2_board0_jar.controller.login;
 
 import com.example.W2_board0_jar.dto.join.JoinDto;
 import com.example.W2_board0_jar.service.login.LoginService;
+import com.example.W2_board0_jar.service.mail.MailService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -20,6 +21,9 @@ public class LoginController {
 
     @Autowired
     LoginService loginService;
+
+    @Autowired
+    MailService mailService;
 
     // Set logger
     private final Logger logger = LogManager.getLogger(this.getClass());
@@ -71,4 +75,86 @@ public class LoginController {
 
         return "login";
     }
+
+    /**
+     * 아이디 찾기 화면 이동
+     */
+    @RequestMapping("/member/movefindID")
+    public String movefindID(Model model, @RequestParam Map<String, Object> paramMap, HttpSession session) throws Exception {
+
+        logger.info("+ Start movefindID");
+
+        return "findID";
+    }
+
+    /**
+     * 비밀번호 찾기 화면 이동
+     */
+    @RequestMapping("/member/movefindPW")
+    public String movefindPW(Model model, @RequestParam Map<String, Object> paramMap, HttpSession session) throws Exception {
+
+        logger.info("+ Start movefindID");
+
+        return "findPW";
+    }
+
+    /**
+     * 아이디 찾기
+     */
+//    @PostMapping("/member/findID")
+//    public String findID(Model model, @RequestParam Map<String, Object> paramMap, HttpSession session) throws Exception {
+//
+//        logger.info("+ Start " + className + ".Join");
+//        logger.info(paramMap.toString());
+//
+//        try {
+//            int result = joinService.Join(paramMap);
+//
+//            if (result > 0) {
+//                logger.info("Insert 완료");
+//
+//                return "redirect:/";
+//
+//            } else {
+//                logger.warn("Insert 실패");
+//
+//                return "join";
+//            }
+//
+//        } catch (Exception e) {
+//            logger.error("오류 발생", e);
+//
+//            return "join";
+//        }
+//    }
+
+    /**
+     * 비밀번호 찾기
+     */
+//    @PostMapping("/member/findPW")
+//    public String findPW(Model model, @RequestParam Map<String, Object> paramMap, HttpSession session) throws Exception {
+//
+//        logger.info("+ Start " + className + ".Join");
+//        logger.info(paramMap.toString());
+//
+//        try {
+//            int result = joinService.Join(paramMap);
+//
+//            if (result > 0) {
+//                logger.info("Insert 완료");
+//
+//                return "redirect:/";
+//
+//            } else {
+//                logger.warn("Insert 실패");
+//
+//                return "join";
+//            }
+//
+//        } catch (Exception e) {
+//            logger.error("오류 발생", e);
+//
+//            return "join";
+//        }
+//    }
 }

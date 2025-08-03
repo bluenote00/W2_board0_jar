@@ -135,18 +135,15 @@ public class JoinController {
 
             if (result > 0) {
                 logger.info("Insert 완료");
-
                 return "redirect:/";
 
             } else {
-                logger.warn("Insert 실패");
-
+                logger.info("Insert 실패");
                 return "join";
             }
 
         } catch (Exception e) {
-            logger.error("오류 발생", e);
-
+            logger.info("오류 발생", e);
             return "join";
         }
     }
