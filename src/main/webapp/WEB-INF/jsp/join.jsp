@@ -292,21 +292,20 @@
 
     function checkRandomCode() {
         const userCode = document.getElementById('userCode').value;
-        const userEmail = document.getElementById('userEmail').value;
 
         if (!userCode) {
             alert('코드를 입력해주세요.');
             return;
         }
 
-        fetch(`${contextPath}/member/emailChecked?userEmail=${userEmail}&userCode=${userCode}`)
-            .then(response => response.text())
-            .then(result => {
-                if (result === "1") {
-                    alert('메일 인증이 완료되었습니다.');
+        fetch('${pageContext.request.contextPath}/member/emailChecked?userCode=' + userCode)
+            .then(response => response.json())
+            .then(checkCode => {
+                if (checkCode === 1) {
+                    alert('인증이 완료되었습니다.');
                     emailChecked = true;
                 } else {
-                    alert('메일 인증에 실패하였습니다.');
+                    alert('인증에 실패하였습니다.');
                     emailChecked = false;
                 }
             });

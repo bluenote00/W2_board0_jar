@@ -18,6 +18,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
                         "/member/sendmail",
                         "/member/check-id",
                         "/member/check-name",
+                        "/selectComcode",
+                        "/member/emailChecked",
                         "/member/join",
                         "/css/**",
                         "/js/**",

@@ -1,11 +1,9 @@
 package com.example.W2_board0_jar.service.join;
 
 import com.example.W2_board0_jar.dao.join.JoinDao;
-import com.example.W2_board0_jar.dto.join.JoinDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Map;
 
 @Service

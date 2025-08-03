@@ -65,29 +65,24 @@ public class JoinController {
         }
     }
 
-
-
     /**
      * 이메일 인증 (랜덤 코드 비교 후 인증 완료)
      */
-
     @GetMapping("/member/emailChecked")
     @ResponseBody
-    public String emailChecked(@RequestParam("userCode") String userCode,
-                               @RequestParam("userEmail") String userEmail,
-                               HttpSession session) {
+    public String emailChecked(@RequestParam("userCode") String userCode, HttpSession session) {
+
+        System.out.println("userCode: " + userCode);
 
         String sessionCode = (String) session.getAttribute("authCode");
-        String sessionEmail = (String) session.getAttribute("authEmail");
+        System.out.println("sessionCode: " + sessionCode);
 
-        if (sessionCode != null && sessionCode.equals(userCode)
-                && sessionEmail != null && sessionEmail.equals(userEmail)) {
+        if (sessionCode != null && sessionCode.equals(userCode)) {
             return "1";
         } else {
             return "0";
         }
     }
-
 
     /**
      * 아이디 중복 체크
