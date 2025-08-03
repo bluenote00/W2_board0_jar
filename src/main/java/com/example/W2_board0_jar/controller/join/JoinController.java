@@ -84,6 +84,7 @@ public class JoinController {
         }
     }
 
+
     /**
      * 아이디 중복 체크
      */
@@ -127,16 +128,24 @@ public class JoinController {
     public String Join(Model model, @RequestParam Map<String, Object> paramMap, HttpSession session) throws Exception {
 
         logger.info("+ Start " + className + ".Join");
-        logger.info("+ Start " + paramMap + ".Join");
+        logger.info(paramMap.toString());
 
         try {
-            joinService.Join(paramMap);
-            model.addAttribute("message", "가입이 완료되었습니다");
-            return "redirect:/";
+            int result = joinService.Join(paramMap);
+
+            if (result > 0) {
+                logger.info("Insert 완료");
+
+                return "redirect:/";
+
+            } else {
+                logger.warn("Insert 실패");
+
+                return "join";
+            }
 
         } catch (Exception e) {
-            model.addAttribute("message", "가입에 실패하였습니다.");
-            model.addAttribute(paramMap);
+            logger.error("오류 발생", e);
 
             return "join";
         }
