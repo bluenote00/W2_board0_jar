@@ -47,6 +47,7 @@ public class JoinController {
     @GetMapping("/member/sendmail")
     @ResponseBody
     public String sendEmail(@RequestParam("userEmail") String userEmail, HttpSession session) {
+
         try {
             // 인증번호 생성
             String authCode = mailService.createRandomCode();
@@ -72,10 +73,11 @@ public class JoinController {
     @ResponseBody
     public String emailChecked(@RequestParam("userCode") String userCode, HttpSession session) {
 
-        System.out.println("userCode: " + userCode);
+        logger.info("+ Start " + className + userCode);
 
         String sessionCode = (String) session.getAttribute("authCode");
-        System.out.println("sessionCode: " + sessionCode);
+
+        logger.info("+ Start " + className + sessionCode);
 
         if (sessionCode != null && sessionCode.equals(userCode)) {
             return "1";

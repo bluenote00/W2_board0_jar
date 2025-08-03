@@ -48,4 +48,18 @@ public class LoginService {
 
         return resultMap;
     }
+
+    /**
+     * 아이디 찾기
+     */
+    public String findUserId(String userEmail) throws Exception {
+        return loginDao.findUserId(userEmail);
+    }
+
+    /**
+     * 비밀번호 찾기
+     */
+    public String findUserPW(String userEmail) throws Exception {
+        return loginDao.findUserPW(userEmail);
+    }
 }

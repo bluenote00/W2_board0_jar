@@ -99,62 +99,65 @@ public class LoginController {
     }
 
     /**
-     * 아이디 찾기
+     * 아이디 찾기 (메일로 아이디 발송)
      */
-//    @PostMapping("/member/findID")
-//    public String findID(Model model, @RequestParam Map<String, Object> paramMap, HttpSession session) throws Exception {
-//
-//        logger.info("+ Start " + className + ".Join");
-//        logger.info(paramMap.toString());
-//
-//        try {
-//            int result = joinService.Join(paramMap);
-//
-//            if (result > 0) {
-//                logger.info("Insert 완료");
-//
-//                return "redirect:/";
-//
-//            } else {
-//                logger.warn("Insert 실패");
-//
-//                return "join";
-//            }
-//
-//        } catch (Exception e) {
-//            logger.error("오류 발생", e);
-//
-//            return "join";
-//        }
-//    }
+    @GetMapping("/member/findID")
+    @ResponseBody
+    public String findID(@RequestParam("userEmail") String userEmail, HttpSession session) {
+
+            logger.info("+ Start UserEmail : " + userEmail);
+
+        try {
+            // 이메일로 ID 검색
+            String findUserId = loginService.findUserId(userEmail);
+
+            logger.info("+ Start UserId : " + findUserId);
+
+            // ID가 없는 경우
+            if (findUserId == null || findUserId.isEmpty()) {
+                return "3";
+            }
+
+            // 메일 전송
+            mailService.sendFindIDMail(userEmail, findUserId);
+            return "1";
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "0";
+        }
+    }
 
     /**
-     * 비밀번호 찾기
+     * 비밀번호 찾기  (메일로 비밀번호 발송)
      */
-//    @PostMapping("/member/findPW")
-//    public String findPW(Model model, @RequestParam Map<String, Object> paramMap, HttpSession session) throws Exception {
-//
-//        logger.info("+ Start " + className + ".Join");
-//        logger.info(paramMap.toString());
-//
-//        try {
-//            int result = joinService.Join(paramMap);
-//
-//            if (result > 0) {
-//                logger.info("Insert 완료");
-//
-//                return "redirect:/";
-//
-//            } else {
-//                logger.warn("Insert 실패");
-//
-//                return "join";
-//            }
-//
-//        } catch (Exception e) {
-//            logger.error("오류 발생", e);
-//
-//            return "join";
-//        }
-//    }
+    @GetMapping("/member/findPW")
+    @ResponseBody
+    public String findPW(@RequestParam("userEmail") String userEmail, HttpSession session) {
+
+        logger.info("+ Start UserEmail : " + userEmail);
+
+        try {
+            // 이메일로 ID 검색
+            String findUserId = loginService.findUserId(userEmail);
+
+            logger.info("+ Start UserPW : " + findUserId);
+
+            // ID가 없는 경우
+            if (findUserId == null || findUserId.isEmpty()) {
+                return "3";
+            }
+
+            String findUserPW = loginService.findUserPW(findUserId);
+
+            // 메일 전송
+            mailService.sendFindPWMail(userEmail, findUserPW);
+
+            return "1";
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "0";
+        }
+    }
 }

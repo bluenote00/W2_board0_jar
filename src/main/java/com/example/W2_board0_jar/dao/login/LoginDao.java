@@ -8,5 +8,11 @@ import java.util.Map;
 public interface LoginDao {
         // 계정 확인
         Map<String, Object> selectUserByLoginId(String userId);
+
+        // 아이디 찾기
+        String findUserId(String userEmail);
+
+        // 아이디 찾기
+        String findUserPW(String userId);
     }
 

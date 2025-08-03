@@ -23,6 +23,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
                         "/member/join",
                         "/member/movefindID",
                         "/member/movefindPW",
+                        "/member/findID",
+                        "/member/findPW",
                         "/css/**",
                         "/js/**",
                         "/images/**",
