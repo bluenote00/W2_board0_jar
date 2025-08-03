@@ -111,7 +111,8 @@
             <button type="button" class="btn-check-email" onclick="checkSendEmail()">인증 메일 발송</button>
         </div>
 
-        <div class="form-group">
+        <!-- 이메일 인증코드 입력 -->
+        <div id="emailCodeArea" class="form-group" style="display: none;">
             <label for="userCode">인증번호 입력</label>
             <input type="text" class="form-control" id="userCode" name="userCode" value="${userCode}">
             <button type="button" class="btn-check-email" onclick="checkRandomCode()">인증번호 확인</button>
@@ -268,7 +269,7 @@
     }
 
     function checkSendEmail() {
-        const userEmail = document.getElementById('').userEmail;
+        const userEmail = document.getElementById('userEmail').value;
 
         if (!userEmail) {
             alert('이메일 주소를 입력해주세요.');
@@ -278,9 +279,10 @@
         fetch('${pageContext.request.contextPath}/member/sendmail?userEmail=' + userEmail)
             .then(response => response.json())
             .then(checkEmail => {
-                if (checkEmail = 1) {
+                if (checkEmail === 1) {
                     alert('메일이 발송되었습니다.');
                     emailSendYN = true;
+                    document.getElementById('emailCodeArea').style.display = 'flex';
                 } else {
                     alert('메일 발송에 실패하였습니다.');
                     emailSendYN = false;
@@ -289,17 +291,18 @@
     }
 
     function checkRandomCode() {
-        const userCode = document.getElementById('').userCode;
+        const userCode = document.getElementById('userCode').value;
+        const userEmail = document.getElementById('userEmail').value;
 
         if (!userCode) {
             alert('코드를 입력해주세요.');
             return;
         }
 
-        fetch('${pageContext.request.contextPath}/member/emailChecked?userCode=' + userCode)
-            .then(response => response.json())
-            .then(checkCode => {
-                if (checkCode = 1) {
+        fetch(`${contextPath}/member/emailChecked?userEmail=${userEmail}&userCode=${userCode}`)
+            .then(response => response.text())
+            .then(result => {
+                if (result === "1") {
                     alert('메일 인증이 완료되었습니다.');
                     emailChecked = true;
                 } else {
@@ -308,6 +311,7 @@
                 }
             });
     }
+
 
     function checkPasswordMatch() {
         const password = document.getElementById('userPw').value;

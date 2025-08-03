@@ -46,28 +46,26 @@ public class JoinController {
 
     @GetMapping("/member/sendmail")
     @ResponseBody
-    public String sendEmail(Model model, @RequestParam("userEmail") String userEmail,
-                            @RequestParam Map<String, Object> paramMap) throws Exception {
-
-        Map<String, Object> checkMap = new HashMap<>();
-        checkMap.put("userEmail", userEmail);
-
-        Map<String, Object> codeMap = new HashMap<>();
-
-        mailService.RandomCode(codeMap);
-
+    public String sendEmail(@RequestParam("userEmail") String userEmail, HttpSession session) {
         try {
-            
-            model.addAttribute("message", "메일이 발송되었습니다.");
+            // 인증번호 생성
+            String authCode = mailService.createRandomCode();
+
+            // 세션에 저장
+            session.setAttribute("authCode", authCode);
+            session.setAttribute("authEmail", userEmail);
+
+            // 메일 전송
+            mailService.sendVerificationMail(userEmail, authCode);
+
             return "1";
-
         } catch (Exception e) {
-            model.addAttribute("message", "메일이 발송에 실패하였습니다.");
-            model.addAttribute(paramMap);
-
+            e.printStackTrace();
             return "0";
         }
     }
+
+
 
     /**
      * 이메일 인증 (랜덤 코드 비교 후 인증 완료)
@@ -75,28 +73,21 @@ public class JoinController {
 
     @GetMapping("/member/emailChecked")
     @ResponseBody
-    public String emailChecked(Model model, @RequestParam("userCode") String userCode,
-                            @RequestParam Map<String, Object> paramMap) throws Exception {
+    public String emailChecked(@RequestParam("userCode") String userCode,
+                               @RequestParam("userEmail") String userEmail,
+                               HttpSession session) {
 
-        Map<String, Object> checkMap = new HashMap<>();
-        checkMap.put("userEmail", userEmail);
+        String sessionCode = (String) session.getAttribute("authCode");
+        String sessionEmail = (String) session.getAttribute("authEmail");
 
-        Map<String, Object> codeMap = new HashMap<>();
-
-        mailService.RandomCode(codeMap);
-
-        try {
-
-            model.addAttribute("message", "메일이 발송되었습니다.");
+        if (sessionCode != null && sessionCode.equals(userCode)
+                && sessionEmail != null && sessionEmail.equals(userEmail)) {
             return "1";
-
-        } catch (Exception e) {
-            model.addAttribute("message", "메일이 발송에 실패하였습니다.");
-            model.addAttribute(paramMap);
-
+        } else {
             return "0";
         }
     }
+
 
     /**
      * 아이디 중복 체크
