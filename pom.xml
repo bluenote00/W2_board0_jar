@@ -35,6 +35,12 @@
             <artifactId>spring-boot-starter-jdbc</artifactId>
         </dependency>
 
+        <!-- 구글 smtp -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
+
         <!--   mybatis   -->
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
