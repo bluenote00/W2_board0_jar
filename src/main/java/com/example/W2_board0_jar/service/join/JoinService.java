@@ -34,4 +34,6 @@ public class JoinService {
     public int Join(Map<String, Object> paramMap) throws Exception {
         return joinDao.Join(paramMap);
     }
+
+
 }

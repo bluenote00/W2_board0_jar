@@ -14,6 +14,7 @@ public class JoinDto {
     private String createTime;
     private String modifier;
     private String modifierTime;
+    private String approvalKey;
 
     public JoinDto() {}
 
@@ -119,6 +120,14 @@ public class JoinDto {
 
     public void setModifierTime(String modifierTime) {
         this.modifierTime = modifierTime;
+    }
+
+    public String getApprovalKey() {
+        return approvalKey;
+    }
+
+    public void setApprovalKey(String approvalKey) {
+        this.approvalKey = approvalKey;
     }
 
 

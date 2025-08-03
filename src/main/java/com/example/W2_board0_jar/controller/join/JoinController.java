@@ -1,6 +1,7 @@
 package com.example.W2_board0_jar.controller.join;
 
 import com.example.W2_board0_jar.service.join.JoinService;
+import com.example.W2_board0_jar.service.mail.MailService;
 import jakarta.servlet.http.HttpSession;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -24,15 +25,39 @@ public class JoinController {
     @Autowired
     JoinService joinService;
 
+    @Autowired
+    MailService mailService;
+
     /**
      * 가입하기 화면
      */
     @RequestMapping("/member/moveJoin")
-    public String MoveJoin(Model model, @RequestParam Map<String, Object> paramMap, HttpSession session) throws Exception {
+    public String MoveJoin(@RequestParam Map<String, Object> paramMap, HttpSession session) throws Exception {
 
         logger.info("+ Start " + className + ".MoveJoin");
 
         return "join";
+    }
+
+
+    /**
+     * 이메일 인증
+     */
+
+    @GetMapping("/member/sendmail")
+    @ResponseBody
+    public String sendEmail(@RequestBody String data) throws Exception {
+
+        try{
+            mailService.sendCertificationMail(email);
+
+            long verifyCodeId = mailService.sendCertificationMail(email);
+
+            return new BaseResponse<Long>(verifyCodeId);
+        }
+        catch (BaseException baseException){
+            return  new BaseResponse<>(baseException.getStatus());
+        }
     }
 
     /**

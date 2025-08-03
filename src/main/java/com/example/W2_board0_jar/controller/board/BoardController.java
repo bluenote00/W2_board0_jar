@@ -36,7 +36,7 @@ public class BoardController {
     @RequestMapping("/")
     public String SelectBoardList(Model model, @RequestParam Map<String, Object> paramMap, HttpSession session) throws Exception {
 
-        logger.info("+ Start " + className + ".paramMap");
+        logger.info("+ Start " + className + paramMap);
 
         int currentPage = paramMap.get("pageNum") != null ? Integer.parseInt((String) paramMap.get("pageNum")) : 1;
         int pageSize = paramMap.get("size") != null ? Integer.parseInt((String) paramMap.get("size")) : 10;
@@ -53,9 +53,6 @@ public class BoardController {
 
         int totalElements = boardService.SelectBoardCount(paramMap);
         int totalPages = (int) Math.ceil((double) totalElements / pageSize);
-
-        logger.info("+ Start " + className + paramMap);
-        logger.info("+ End " + this.getClass());
 
         model.addAttribute("boardList", boardList);
         model.addAttribute("currentPage", currentPage);
@@ -83,8 +80,8 @@ public class BoardController {
 
         // 이전글+다음글
         List<Map<String,Object>> sequenceList = boardService.selectBoardNextList(paramMap);
-        model.addAttribute("sequenceList", sequenceList);
 
+        model.addAttribute("sequenceList", sequenceList);
         model.addAttribute("boardDetail", boardDetail);
         model.addAttribute("userId", session.getAttribute("userId"));
         model.addAttribute("creator", session.getAttribute("creator"));
