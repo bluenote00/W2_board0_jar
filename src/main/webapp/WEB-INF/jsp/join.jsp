@@ -111,6 +111,12 @@
             <button type="button" class="btn-check-email" onclick="checkSendEmail()">인증 메일 발송</button>
         </div>
 
+        <div class="form-group">
+            <label for="userCode">인증번호 입력</label>
+            <input type="text" class="form-control" id="userCode" name="userCode" value="${userCode}">
+            <button type="button" class="btn-check-email" onclick="checkRandomCode()">인증번호 확인</button>
+        </div>
+
         <!-- Phone -->
         <%-- 전화번호 3가지 합치기  --%>
         <input type="hidden" name="userPhone" id="userPhone">
@@ -159,6 +165,7 @@
 <script>
     let idChecked = false;
     let nameChecked = false;
+    let emailSendYN = false;
     let emailChecked = false;
 
     function validateForm() {
@@ -185,6 +192,11 @@
             return false;
         }
 
+        if (!nameChecked) {
+            alert('이름 중복 확인을 해주세요.');
+            return false;
+        }
+
         if (userPw !== pwCheck) {
             alert('비밀번호가 일치하지 않습니다.');
             return false;
@@ -195,10 +207,10 @@
             return false;
         }
 
-        // if (!emailChecked) {
-        //     alert('이메일 인증을 해주세요.');
-        //     return false;
-        // }
+        if (!emailChecked) {
+            alert('이메일 인증을 해주세요.');
+            return false;
+        }
 
         if (phone2 && phone3) {
             if (!/^\d{3,4}$/.test(phone2) || !/^\d{4}$/.test(phone3)) {
@@ -212,7 +224,6 @@
     function filterToNumbers(input) {
         input.value = input.value.replace(/[^0-9]/g, '');
     }
-
 
     function checkDuplicateId() {
         const userId = document.getElementById('userId').value;
@@ -264,16 +275,35 @@
             return;
         }
 
-        console.log(creator);
-
-        fetch(`${pageContext.request.contextPath}/member/check-creator?creator=${creator}`)
+        fetch('${pageContext.request.contextPath}/member/sendmail?userEmail=' + userEmail)
             .then(response => response.json())
-            .then(duplicateCount2 => {
-                if (duplicateCount2 < 1) {
-                    alert('사용 가능한 닉네임입니다.');
+            .then(checkEmail => {
+                if (checkEmail = 1) {
+                    alert('메일이 발송되었습니다.');
+                    emailSendYN = true;
+                } else {
+                    alert('메일 발송에 실패하였습니다.');
+                    emailSendYN = false;
+                }
+            });
+    }
+
+    function checkRandomCode() {
+        const userCode = document.getElementById('').userCode;
+
+        if (!userCode) {
+            alert('코드를 입력해주세요.');
+            return;
+        }
+
+        fetch('${pageContext.request.contextPath}/member/emailChecked?userCode=' + userCode)
+            .then(response => response.json())
+            .then(checkCode => {
+                if (checkCode = 1) {
+                    alert('메일 인증이 완료되었습니다.');
                     emailChecked = true;
                 } else {
-                    alert('이미 사용중인 닉네임입니다.');
+                    alert('메일 인증에 실패하였습니다.');
                     emailChecked = false;
                 }
             });

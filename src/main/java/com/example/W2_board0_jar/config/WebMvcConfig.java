@@ -14,6 +14,11 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .excludePathPatterns(
                         "/member/moveLogin",
                         "/member/login",
+                        "/member/moveJoin",
+                        "/member/sendmail",
+                        "/member/check-id",
+                        "/member/check-name",
+                        "/member/join",
                         "/css/**",
                         "/js/**",
                         "/images/**",

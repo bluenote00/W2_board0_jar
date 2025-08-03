@@ -41,22 +41,60 @@ public class JoinController {
 
 
     /**
-     * 이메일 인증
+     * 이메일 발송 (랜덤 코드 생성+메일 발송까지만)
      */
 
     @GetMapping("/member/sendmail")
     @ResponseBody
-    public String sendEmail(@RequestBody String data) throws Exception {
+    public String sendEmail(Model model, @RequestParam("userEmail") String userEmail,
+                            @RequestParam Map<String, Object> paramMap) throws Exception {
 
-        try{
-            mailService.sendCertificationMail(email);
+        Map<String, Object> checkMap = new HashMap<>();
+        checkMap.put("userEmail", userEmail);
 
-            long verifyCodeId = mailService.sendCertificationMail(email);
+        Map<String, Object> codeMap = new HashMap<>();
 
-            return new BaseResponse<Long>(verifyCodeId);
+        mailService.RandomCode(codeMap);
+
+        try {
+            
+            model.addAttribute("message", "메일이 발송되었습니다.");
+            return "1";
+
+        } catch (Exception e) {
+            model.addAttribute("message", "메일이 발송에 실패하였습니다.");
+            model.addAttribute(paramMap);
+
+            return "0";
         }
-        catch (BaseException baseException){
-            return  new BaseResponse<>(baseException.getStatus());
+    }
+
+    /**
+     * 이메일 인증 (랜덤 코드 비교 후 인증 완료)
+     */
+
+    @GetMapping("/member/emailChecked")
+    @ResponseBody
+    public String emailChecked(Model model, @RequestParam("userCode") String userCode,
+                            @RequestParam Map<String, Object> paramMap) throws Exception {
+
+        Map<String, Object> checkMap = new HashMap<>();
+        checkMap.put("userEmail", userEmail);
+
+        Map<String, Object> codeMap = new HashMap<>();
+
+        mailService.RandomCode(codeMap);
+
+        try {
+
+            model.addAttribute("message", "메일이 발송되었습니다.");
+            return "1";
+
+        } catch (Exception e) {
+            model.addAttribute("message", "메일이 발송에 실패하였습니다.");
+            model.addAttribute(paramMap);
+
+            return "0";
         }
     }
 

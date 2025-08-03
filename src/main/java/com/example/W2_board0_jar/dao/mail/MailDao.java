@@ -5,7 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.Map;
 
 @Mapper
-public class MailDao {
+public interface MailDao {
     /**
      * 인증번호 insert
      */
