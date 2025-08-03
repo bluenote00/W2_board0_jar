@@ -52,6 +52,10 @@
             <span class="label">Writer:</span>
             <div class="content"><c:out value="${boardDto.creator}"/></div>
         </div>
+        <div class="view-group">
+            <span class="label">첨부파일:</span>
+            <div class="content"><c:out value="${boardDto.fileName}"/></div>
+        </div>
 
         <div>
             <c:forEach var="listLevel" items="${sequenceList}">

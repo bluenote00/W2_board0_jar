@@ -4,10 +4,13 @@ import com.example.W2_board0_jar.dao.board.BoardDao;
 import com.example.W2_board0_jar.dto.board.BoardDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 @Service
 public class BoardService {
@@ -46,7 +49,32 @@ public class BoardService {
     /**
      * 게시글 작성
      */
-    public int BoardWrite(Map<String, Object> paramMap) throws Exception {
+    public int BoardWrite(Map<String, Object> paramMap, MultipartFile file) throws Exception {
+
+        if (!file.isEmpty()) {
+        // 파일 업로드 처리 시작
+        String projectPath = System.getProperty("user.dir")
+        // 파일이 저장될 폴더의 경로
+                + "/src/main/resources/static/files";
+
+        // 랜덤으로 식별자를 생성
+        String uuid = UUID.randomUUID().toString();
+
+        // UUID와 파일이름을 포함된 파일 이름으로 저장
+        String fileName = uuid + "_" + file.getOriginalFilename();
+
+        // projectPath는 위에서 작성한 경로, name은 전달받을 이름
+        File saveFile = new File(projectPath, fileName);
+        file.transferTo(saveFile);
+
+        paramMap.put("fileName", fileName);
+        paramMap.put("fileRoot", "/files/" + fileName);
+
+        } else {
+            paramMap.put("fileName", null);
+            paramMap.put("fileRoot", null);
+        }
+
         return dao.BoardWrite(paramMap);
     }
 

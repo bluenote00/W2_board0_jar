@@ -11,7 +11,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -118,14 +120,14 @@ public class BoardController {
      * 게시글 작성
      */
     @RequestMapping("/board/boardwrite")
-    public String BoardWrite(@RequestParam Map<String, Object> paramMap, HttpSession session) throws Exception {
+    public String BoardWrite(@RequestParam("uploadFile") MultipartFile file, @RequestParam Map<String, Object> paramMap, HttpSession session) throws Exception {
 
         logger.info("+ Start " + className + paramMap);
 
         paramMap.put("userId", session.getAttribute("userId"));
         paramMap.put("creator", session.getAttribute("creator"));
 
-        boardService.BoardWrite(paramMap);
+        boardService.BoardWrite(paramMap, file);
 
         return "redirect:/";
     }

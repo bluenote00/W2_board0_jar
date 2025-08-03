@@ -16,7 +16,7 @@
 <body>
 <div class="container">
     <h2>게시글 작성</h2>
-    <form action="${pageContext.request.contextPath}/board/boardwrite" method="post">
+    <form action="${pageContext.request.contextPath}/board/boardwrite" enctype="multipart/form-data" method="post">
         <input type="hidden" id="userId" name="userId" value ="${userId}"/>
         <input type="hidden" id="creator" name="creator" value ="${creator}"/>
         <input type="hidden" id="userName" name="userName" value ="${userName}"/>

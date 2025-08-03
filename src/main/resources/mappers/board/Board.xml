@@ -17,8 +17,7 @@
                 ELSE '기타'
                 END AS boardTypeName,
                 BOARD_NUM AS boardNum,
-                BOARD_TITLE AS boardTitle,
-                BOARD_COMMENT AS boardComment
+                BOARD_TITLE AS boardTitle
         FROM BOARD
         <if test="boardType != null and boardType != ''">
             WHERE BOARD_TYPE = #{boardType}
@@ -56,6 +55,7 @@
              ,		BOARD_TITLE     AS  boardTitle
              ,    	BOARD_COMMENT   AS  boardComment
              ,    	FILE_NAME       AS  fileName
+             ,    	FILE_ROOT       AS  fileRoot
              ,    	CREATOR 		AS  creator
         FROM 		BOARD
         WHERE       BOARD_NUM       =   #{boardNum}
@@ -110,6 +110,8 @@
                     BOARD_TYPE      =   #{boardType}
           ,         BOARD_TITLE	    = 	#{boardTitle}
           ,	        BOARD_COMMENT 	= 	#{boardComment}
+          ,		    FILE_NAME       =   #{fileName}
+          ,		    FILE_ROOT       =   #{fileRoot}
           ,	        MODIFIER 		= 	#{userId}
           ,  	    MODIFIED_TIME 	=   SYSDATE
         WHERE 		BOARD_NUM       =   #{boardNum}

@@ -32,7 +32,7 @@ public class BoardDto {
     // 파일명
     private String fileName;
     
-    // 파일경로
+    // 파일 경로
     private String fileRoot;
 
     public BoardDto() {}
@@ -113,7 +113,7 @@ public class BoardDto {
         return fileName;
     }
 
-    public void setFileName(String fileRoot) {
+    public void setFileName(String fileName) {
         this.fileName = fileName;
     }
 
