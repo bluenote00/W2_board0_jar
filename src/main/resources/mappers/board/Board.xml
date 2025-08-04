@@ -108,12 +108,16 @@
         UPDATE 		BOARD
         SET
                     BOARD_TYPE      =   #{boardType}
-          ,         BOARD_TITLE	    = 	#{boardTitle}
-          ,	        BOARD_COMMENT 	= 	#{boardComment}
-          ,		    FILE_NAME       =   #{fileName}
-          ,		    FILE_ROOT       =   #{fileRoot}
-          ,	        MODIFIER 		= 	#{userId}
-          ,  	    MODIFIED_TIME 	=   SYSDATE
+        ,           BOARD_TITLE	    = 	#{boardTitle}
+        ,	        BOARD_COMMENT 	= 	#{boardComment}
+        <if test="fileName !=null and fileName!=''">
+        ,		    FILE_NAME       =   #{fileName}
+        </if>
+        <if test="fileRoot !=null and fileRoot!=''">
+        ,		    FILE_ROOT       =   #{fileRoot}
+        </if>
+        ,	        MODIFIER 		= 	#{userId}
+        ,  	        MODIFIED_TIME 	=   SYSDATE
         WHERE 		BOARD_NUM       =   #{boardNum}
     </update>
 

@@ -71,8 +71,8 @@ public class BoardService {
         paramMap.put("fileRoot", "/files/" + fileName);
 
         } else {
-            paramMap.put("fileName", null);
-            paramMap.put("fileRoot", null);
+            paramMap.put("fileName", "");
+            paramMap.put("fileRoot", "");
         }
 
         return dao.BoardWrite(paramMap);
