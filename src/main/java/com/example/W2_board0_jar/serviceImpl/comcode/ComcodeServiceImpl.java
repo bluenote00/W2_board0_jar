@@ -1,0 +1,23 @@
+package com.example.W2_board0_jar.serviceImpl.comcode;
+
+import com.example.W2_board0_jar.dao.comcode.ComcodeDao;
+import com.example.W2_board0_jar.dto.comcode.ComcodeDto;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Map;
+
+@Service
+public class ComcodeServiceImpl {
+
+    @Autowired
+    ComcodeDao comcodeDao;
+
+    /**
+     * 코드 조회
+     */
+    public List<ComcodeDto> SelectCommonCode(Map<String, Object> paramMap) throws Exception {
+        return comcodeDao.SelectCommonCode(paramMap);
+    }
+}
