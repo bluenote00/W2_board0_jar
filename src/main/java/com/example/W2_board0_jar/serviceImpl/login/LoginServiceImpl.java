@@ -1,7 +1,8 @@
-package com.example.W2_board0_jar.service.login;
+package com.example.W2_board0_jar.serviceImpl.login;
 
 import com.example.W2_board0_jar.dao.login.LoginDao;
 import com.example.W2_board0_jar.dto.join.JoinDto;
+import com.example.W2_board0_jar.service.login.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

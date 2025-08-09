@@ -1,7 +1,8 @@
-package com.example.W2_board0_jar.service.board;
+package com.example.W2_board0_jar.serviceImpl.board;
 
 import com.example.W2_board0_jar.dao.board.BoardDao;
 import com.example.W2_board0_jar.dto.board.BoardDto;
+import com.example.W2_board0_jar.service.board.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;

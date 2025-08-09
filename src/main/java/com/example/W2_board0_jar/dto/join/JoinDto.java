@@ -23,7 +23,7 @@ public class JoinDto {
 
     public String getUserNo() { return userNo; }
 
-    public void setUserNo(String approvalKey) {
+    public void setUserNo(String userNo) {
         this.userNo = userNo;
     }
 

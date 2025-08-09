@@ -1,7 +1,8 @@
-package com.example.W2_board0_jar.service.comcode;
+package com.example.W2_board0_jar.serviceImpl.comcode;
 
 import com.example.W2_board0_jar.dao.comcode.ComcodeDao;
 import com.example.W2_board0_jar.dto.comcode.ComcodeDto;
+import com.example.W2_board0_jar.service.comcode.ComcodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
