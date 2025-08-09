@@ -1,6 +1,7 @@
 package com.example.W2_board0_jar.dto.join;
 
 public class JoinDto {
+    private String userNo;
     private String userId;
     private String userName;
     private String userPw;
@@ -14,9 +15,17 @@ public class JoinDto {
     private String createTime;
     private String modifier;
     private String modifierTime;
-    private String approvalKey;
+    private String joinType;
+    private String userRole;
+
 
     public JoinDto() {}
+
+    public String getUserNo() { return userNo; }
+
+    public void setUserNo(String approvalKey) {
+        this.userNo = userNo;
+    }
 
     public String getUserId() {
         return userId;
@@ -122,13 +131,18 @@ public class JoinDto {
         this.modifierTime = modifierTime;
     }
 
-    public String getApprovalKey() {
-        return approvalKey;
+    public String getJoinType() {
+        return joinType;
+    }
+    public void setJoinType(String joinType) {
+        this.joinType = joinType;
     }
 
-    public void setApprovalKey(String approvalKey) {
-        this.approvalKey = approvalKey;
+    public String getUserRole() {
+        return userRole;
     }
 
-
+    public void setUserRole(String userRole) {
+        this.userRole = userRole;
+    }
 }

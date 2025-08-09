@@ -1,4 +1,4 @@
-package com.example.W2_board0_jar.serviceImpl.comcode;
+package com.example.W2_board0_jar.service.comcode;
 
 import com.example.W2_board0_jar.dao.comcode.ComcodeDao;
 import com.example.W2_board0_jar.dto.comcode.ComcodeDto;
@@ -9,14 +9,12 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class ComcodeServiceImpl {
+public class ComcodeServiceImpl implements ComcodeService {
 
     @Autowired
-    ComcodeDao comcodeDao;
+    private ComcodeDao comcodeDao;
 
-    /**
-     * 코드 조회
-     */
+    @Override
     public List<ComcodeDto> SelectCommonCode(Map<String, Object> paramMap) throws Exception {
         return comcodeDao.SelectCommonCode(paramMap);
     }

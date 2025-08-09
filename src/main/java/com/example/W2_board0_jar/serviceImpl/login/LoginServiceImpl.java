@@ -1,4 +1,4 @@
-package com.example.W2_board0_jar.serviceImpl.login;
+package com.example.W2_board0_jar.service.login;
 
 import com.example.W2_board0_jar.dao.login.LoginDao;
 import com.example.W2_board0_jar.dto.join.JoinDto;
@@ -9,21 +9,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
-public class LoginServiceImpl {
+public class LoginServiceImpl implements LoginService {
 
     @Autowired
     private LoginDao loginDao;
 
-    /**
-     * 로그인
-     */
+    @Override
     public Map<String, Object> login(JoinDto joinDto) throws Exception {
         String userId = joinDto.getUserId();
         String password = joinDto.getUserPw();
 
         Map<String, Object> resultMap = new HashMap<>();
 
-        // 아이디로 사용자 조회
         Map<String, Object> user = loginDao.selectUserByLoginId(userId);
 
         if (user == null) {
@@ -45,21 +42,16 @@ public class LoginServiceImpl {
                 resultMap.put("message", "잘못된 비밀번호입니다.");
             }
         }
-
         return resultMap;
     }
 
-    /**
-     * 아이디 찾기
-     */
+    @Override
     public String findUserId(String userEmail) throws Exception {
         return loginDao.findUserId(userEmail);
     }
 
-    /**
-     * 비밀번호 찾기
-     */
-    public String findUserPW(String userEmail) throws Exception {
-        return loginDao.findUserPW(userEmail);
+    @Override
+    public String findUserPW(String userId) throws Exception {
+        return loginDao.findUserPW(userId);
     }
 }

@@ -83,40 +83,42 @@
 
 </head>
 <body>
-    <div class="container">
-        <h2>로그인</h2>
+<div class="container">
+    <h2>로그인</h2>
 
-        <c:if test="${not empty errorMessage}">
-            <div class="error-message">${errorMessage}</div>
-        </c:if>
+    <c:if test="${param.error != null}">
+        <div class="error-message">아이디 또는 비밀번호가 올바르지 않습니다.</div>
+    </c:if>
 
-        <form action="${pageContext.request.contextPath}/member/login" method="post">
-            <div class="form-group">
-                <label for="userId">아이디</label>
-                <input type="text" class="form-control" id="userId" name="userId" required placeholder="아이디를 입력하세요">
-            </div>
+    <form action="${pageContext.request.contextPath}/member/login" method="post">
 
-            <div class="form-group">
-                <label for="userPw">비밀번호</label>
-                <input type="password" class="form-control" id="userPw" name="userPw" required placeholder="비밀번호를 입력하세요">
-            </div>
 
-            <div class="remember-me">
-                <input type="checkbox" id="remember-me" name="remember-me">
-                <label for="remember-me">로그인 상태 유지</label>
-            </div>
+        <div class="form-group">
+            <label for="userId">아이디</label>
+            <input type="text" class="form-control" id="userId" name="userId" required placeholder="아이디를 입력하세요">
+        </div>
+        <div class="form-group">
+            <label for="userPw">비밀번호</label>
+            <input type="password" class="form-control" id="userPw" name="userPw" required placeholder="비밀번호를 입력하세요">
+        </div>
 
-            <div class="links">
-                <button type="submit">Login</button>
-                <a href="${pageContext.request.contextPath}/member/moveJoin">Join</a>
-            </div>
+        <div class="remember-me">
+            <input type="checkbox" id="remember-me" name="remember-me">
+            <label for="remember-me">로그인 상태 유지</label>
+        </div>
 
-            <div class="links">
-                <a href="${pageContext.request.contextPath}/member/movefindID">아이디 찾기</a>
-                |
-                <a href="${pageContext.request.contextPath}/member/movefindPW">비밀번호 찾기</a>
-            </div>
-        </form>
-    </div>
+        <div class="links">
+            <button type="submit">Login</button>
+            <a href="${pageContext.request.contextPath}/member/moveJoin">Join</a>
+        </div>
+
+        <div class="links">
+            <a href="${pageContext.request.contextPath}/member/movefindID">아이디 찾기</a>
+            |
+            <a href="${pageContext.request.contextPath}/member/movefindPW">비밀번호 찾기</a>
+        </div>
+    </form>
+</div>
 </body>
+</html>
 </html>
