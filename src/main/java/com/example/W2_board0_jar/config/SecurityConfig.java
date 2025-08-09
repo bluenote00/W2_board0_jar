@@ -27,8 +27,6 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
 
-                // CSRF 비활성화 (JWT + 쿠키 사용하므로)
-                .csrf().disable()
 
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(

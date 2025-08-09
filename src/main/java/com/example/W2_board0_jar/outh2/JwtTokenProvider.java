@@ -5,12 +5,14 @@ import io.jsonwebtoken.security.Keys;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+@Component
 public class JwtTokenProvider {
     private final Logger logger = LogManager.getLogger(this.getClass());
 

@@ -19,7 +19,7 @@ public class UserPrincipal implements Serializable {
 
     public UserPrincipal() {}
 
-    public UserPrincipal(Long user_no, String login_id, String user_name, String user_type, Date expire_days) {
+    public UserPrincipal(Long user_no, String login_id, String user_name, String user_type) {
         this.user_no = user_no;
         this.login_id = login_id;
         this.user_name = user_name;
